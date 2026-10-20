@@ -1,0 +1,352 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens: Seu negócio
+   ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
+
+  --color-brand: #d71935;
+  --color-brand-dark: #b8102b;
+  --color-brand-bright: #ee2b45; /* red text on the dark banner (4.5:1) */
+  --color-brand-50: #fdf0f2;
+  --color-brand-100: #fadce1;
+
+  --color-ground: #f7f3ef;
+  --color-ground-2: #efe9e3;
+  --color-surface: #ffffff;
+  --color-ink: #202020;
+  --color-ink-2: #6e6862; /* brief's #777 darkened for 4.5:1 on the warm ground */
+  --color-line: #eae5e0;
+  --color-line-strong: #d9d1c9;
+  --color-oven: #17110f;
+  --color-blush: #fbe7e4;
+
+  --color-success: #1e7f4f;
+  --color-success-50: #e8f5ee;
+  --color-warning: #8f5400;
+  --color-warning-50: #fff4e0;
+  --color-star: #e39a00;
+
+  --radius-tile: 14px;
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+
+  --shadow-tile: 0 6px 18px -8px rgb(74 44 26 / 0.22), 0 1px 2px rgb(74 44 26 / 0.06);
+  --shadow-card: 0 10px 24px -14px rgb(74 44 26 / 0.24), 0 1px 3px rgb(74 44 26 / 0.06);
+  --shadow-raised: 0 12px 22px -8px rgb(184 16 43 / 0.5);
+  --shadow-bar: 0 -8px 24px -12px rgb(74 44 26 / 0.18);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+    background: var(--color-ground);
+    color: var(--color-ink);
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    background: var(--color-ground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-brand-100);
+    color: var(--color-ink);
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* below 16px iOS zooms the page on focus */
+    caret-color: var(--color-brand);
+  }
+
+  button,
+  a,
+  [role='button'],
+  label {
+    touch-action: manipulation;
+  }
+
+  button,
+  [role='button'] {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  dialog {
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  dialog::backdrop {
+    background: transparent;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------ */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Press feedback on pointer-down: the interface heard the tap. */
+@utility press {
+  transition: transform 160ms var(--ease-out);
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Focus ring for controls sitting on the dark banner */
+@utility focus-light {
+  &:focus-visible {
+    outline-color: #fff;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Sheets (native <dialog>): bottom sheet on phones, then
+   centered dialog or side drawer from the large breakpoint.
+   ------------------------------------------------------------------ */
+.sheet {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(23 17 15 / 0.48);
+  opacity: 0;
+  transition: opacity 400ms var(--ease-drawer);
+}
+
+.sheet[data-state='open'] .sheet-backdrop {
+  opacity: 1;
+}
+
+.sheet-panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  box-shadow: 0 -12px 40px -16px rgb(23 17 15 / 0.35);
+  transition:
+    transform 400ms var(--ease-drawer),
+    opacity 400ms var(--ease-drawer);
+}
+
+.sheet-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* bottom (all variants start as a bottom sheet on phones) */
+.sheet-panel[data-variant='center'],
+.sheet-panel[data-variant='right'] {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px));
+  border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  transform: translateY(100%);
+}
+
+.sheet-panel[data-variant='right'][data-size='full'] {
+  height: calc(100dvh - 24px - env(safe-area-inset-top, 0px));
+}
+
+.sheet-panel[data-variant='left'] {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(86vw, 340px);
+  border-radius: 0 var(--radius-sheet) var(--radius-sheet) 0;
+  transform: translateX(-100%);
+}
+
+.sheet[data-state='open'] .sheet-panel {
+  transform: none;
+}
+
+@media (min-width: 1024px) {
+  .sheet-panel[data-variant='center'] {
+    left: 50%;
+    right: auto;
+    top: 50%;
+    bottom: auto;
+    width: min(92vw, var(--sheet-width, 560px));
+    max-height: min(88dvh, 860px);
+    border-radius: 20px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+    transition:
+      transform 250ms var(--ease-out),
+      opacity 250ms var(--ease-out);
+  }
+
+  .sheet[data-state='open'] .sheet-panel[data-variant='center'] {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  .sheet-panel[data-variant='right'],
+  .sheet-panel[data-variant='right'][data-size='full'] {
+    left: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(92vw, 440px);
+    height: auto;
+    max-height: none;
+    border-radius: var(--radius-sheet) 0 0 var(--radius-sheet);
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet-panel,
+  .sheet-panel[data-variant] {
+    transition: opacity 200ms ease !important;
+  }
+  .sheet-panel[data-variant='center'],
+  .sheet-panel[data-variant='right'],
+  .sheet-panel[data-variant='left'] {
+    opacity: 0;
+  }
+  .sheet[data-state='open'] .sheet-panel[data-variant] {
+    opacity: 1;
+  }
+  /* keep the resting position, drop the travel */
+  .sheet-panel[data-variant='center'],
+  .sheet-panel[data-variant='right'],
+  .sheet-panel[data-variant='left'] {
+    transform: none;
+  }
+  @media (min-width: 1024px) {
+    .sheet-panel[data-variant='center'],
+    .sheet[data-state='open'] .sheet-panel[data-variant='center'] {
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Toast and floating bag bar: enter from their own edge.
+   ------------------------------------------------------------------ */
+.toast {
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+}
+
+.toast[data-leaving='true'] {
+  opacity: 0;
+  transform: translateY(-120%);
+}
+
+.cart-bar {
+  transition:
+    opacity 260ms var(--ease-out),
+    transform 260ms var(--ease-out);
+  @starting-style {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .toast[data-leaving='true'],
+  .cart-bar {
+    transform: none;
+    @starting-style {
+      transform: none;
+    }
+  }
+  .press:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* Hero carousel track */
+.snap-track {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.snap-track > * {
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snap-track {
+    scroll-behavior: auto;
+  }
+}

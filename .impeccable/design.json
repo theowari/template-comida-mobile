@@ -1,0 +1,565 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T18:58:03.274Z",
+  "title": "Design System: Seu negócio",
+  "extensions": {
+    "colorMeta": {
+      "pizzeria-red": {
+        "role": "primary",
+        "displayName": "Pizzeria Red",
+        "canonical": "oklch(55.5% 0.215 22)",
+        "tonalRamp": [
+          "oklch(15% 0.072 22)",
+          "oklch(25% 0.107 22)",
+          "oklch(35% 0.143 22)",
+          "oklch(45% 0.179 22)",
+          "oklch(55% 0.215 22)",
+          "oklch(65% 0.179 22)",
+          "oklch(80% 0.125 22)",
+          "oklch(95% 0.072 22)"
+        ]
+      },
+      "pizzeria-red-deep": {
+        "role": "primary",
+        "displayName": "Pizzeria Red Deep",
+        "canonical": "oklch(49% 0.19 20)",
+        "tonalRamp": [
+          "oklch(15% 0.063 20)",
+          "oklch(25% 0.095 20)",
+          "oklch(35% 0.127 20)",
+          "oklch(45% 0.158 20)",
+          "oklch(55% 0.190 20)",
+          "oklch(65% 0.158 20)",
+          "oklch(80% 0.111 20)",
+          "oklch(95% 0.063 20)"
+        ]
+      },
+      "pizzeria-red-bright": {
+        "role": "primary",
+        "displayName": "Pizzeria Red Bright",
+        "canonical": "oklch(60% 0.225 20)",
+        "tonalRamp": [
+          "oklch(15% 0.075 20)",
+          "oklch(25% 0.113 20)",
+          "oklch(35% 0.150 20)",
+          "oklch(45% 0.188 20)",
+          "oklch(55% 0.225 20)",
+          "oklch(65% 0.188 20)",
+          "oklch(80% 0.131 20)",
+          "oklch(95% 0.075 20)"
+        ]
+      },
+      "red-wash": {
+        "role": "primary",
+        "displayName": "Red Wash",
+        "canonical": "oklch(96.5% 0.013 5)",
+        "tonalRamp": [
+          "oklch(15% 0.007 5)",
+          "oklch(25% 0.010 5)",
+          "oklch(35% 0.013 5)",
+          "oklch(45% 0.017 5)",
+          "oklch(55% 0.020 5)",
+          "oklch(65% 0.017 5)",
+          "oklch(80% 0.012 5)",
+          "oklch(95% 0.007 5)"
+        ]
+      },
+      "red-wash-strong": {
+        "role": "primary",
+        "displayName": "Red Wash Strong",
+        "canonical": "oklch(92% 0.035 5)",
+        "tonalRamp": [
+          "oklch(15% 0.012 5)",
+          "oklch(25% 0.018 5)",
+          "oklch(35% 0.023 5)",
+          "oklch(45% 0.029 5)",
+          "oklch(55% 0.035 5)",
+          "oklch(65% 0.029 5)",
+          "oklch(80% 0.020 5)",
+          "oklch(95% 0.012 5)"
+        ]
+      },
+      "flour-ground": {
+        "role": "neutral",
+        "displayName": "Flour Ground",
+        "canonical": "oklch(96.5% 0.007 70)",
+        "tonalRamp": [
+          "oklch(15% 0.007 70)",
+          "oklch(25% 0.010 70)",
+          "oklch(35% 0.013 70)",
+          "oklch(45% 0.017 70)",
+          "oklch(55% 0.020 70)",
+          "oklch(65% 0.017 70)",
+          "oklch(80% 0.012 70)",
+          "oklch(95% 0.007 70)"
+        ]
+      },
+      "flour-ground-deep": {
+        "role": "neutral",
+        "displayName": "Flour Ground Deep",
+        "canonical": "oklch(93.5% 0.01 70)",
+        "tonalRamp": [
+          "oklch(15% 0.007 70)",
+          "oklch(25% 0.010 70)",
+          "oklch(35% 0.013 70)",
+          "oklch(45% 0.017 70)",
+          "oklch(55% 0.020 70)",
+          "oklch(65% 0.017 70)",
+          "oklch(80% 0.012 70)",
+          "oklch(95% 0.007 70)"
+        ]
+      },
+      "plate-white": {
+        "role": "neutral",
+        "displayName": "Plate White",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(25% 0.000 0)",
+          "oklch(35% 0.000 0)",
+          "oklch(45% 0.000 0)",
+          "oklch(55% 0.000 0)",
+          "oklch(65% 0.000 0)",
+          "oklch(80% 0.000 0)",
+          "oklch(95% 0.000 0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(24% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(25% 0.000 0)",
+          "oklch(35% 0.000 0)",
+          "oklch(45% 0.000 0)",
+          "oklch(55% 0.000 0)",
+          "oklch(65% 0.000 0)",
+          "oklch(80% 0.000 0)",
+          "oklch(95% 0.000 0)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted",
+        "canonical": "oklch(52% 0.01 60)",
+        "tonalRamp": [
+          "oklch(15% 0.007 60)",
+          "oklch(25% 0.010 60)",
+          "oklch(35% 0.013 60)",
+          "oklch(45% 0.017 60)",
+          "oklch(55% 0.020 60)",
+          "oklch(65% 0.017 60)",
+          "oklch(80% 0.012 60)",
+          "oklch(95% 0.007 60)"
+        ]
+      },
+      "crumb-line": {
+        "role": "neutral",
+        "displayName": "Crumb Line",
+        "canonical": "oklch(92% 0.008 70)",
+        "tonalRamp": [
+          "oklch(15% 0.007 70)",
+          "oklch(25% 0.010 70)",
+          "oklch(35% 0.013 70)",
+          "oklch(45% 0.017 70)",
+          "oklch(55% 0.020 70)",
+          "oklch(65% 0.017 70)",
+          "oklch(80% 0.012 70)",
+          "oklch(95% 0.007 70)"
+        ]
+      },
+      "crumb-line-strong": {
+        "role": "neutral",
+        "displayName": "Crumb Line Strong",
+        "canonical": "oklch(86% 0.013 70)",
+        "tonalRamp": [
+          "oklch(15% 0.007 70)",
+          "oklch(25% 0.010 70)",
+          "oklch(35% 0.013 70)",
+          "oklch(45% 0.017 70)",
+          "oklch(55% 0.020 70)",
+          "oklch(65% 0.017 70)",
+          "oklch(80% 0.012 70)",
+          "oklch(95% 0.007 70)"
+        ]
+      },
+      "oven-black": {
+        "role": "neutral",
+        "displayName": "Oven Black",
+        "canonical": "oklch(18% 0.008 40)",
+        "tonalRamp": [
+          "oklch(15% 0.007 40)",
+          "oklch(25% 0.010 40)",
+          "oklch(35% 0.013 40)",
+          "oklch(45% 0.017 40)",
+          "oklch(55% 0.020 40)",
+          "oklch(65% 0.017 40)",
+          "oklch(80% 0.012 40)",
+          "oklch(95% 0.007 40)"
+        ]
+      },
+      "promo-blush": {
+        "role": "neutral",
+        "displayName": "Promo Blush",
+        "canonical": "oklch(93.5% 0.022 25)",
+        "tonalRamp": [
+          "oklch(15% 0.007 25)",
+          "oklch(25% 0.011 25)",
+          "oklch(35% 0.015 25)",
+          "oklch(45% 0.018 25)",
+          "oklch(55% 0.022 25)",
+          "oklch(65% 0.018 25)",
+          "oklch(80% 0.013 25)",
+          "oklch(95% 0.007 25)"
+        ]
+      },
+      "basil-green": {
+        "role": "status",
+        "displayName": "Basil Green",
+        "canonical": "oklch(52% 0.11 155)",
+        "tonalRamp": [
+          "oklch(15% 0.037 155)",
+          "oklch(25% 0.055 155)",
+          "oklch(35% 0.073 155)",
+          "oklch(45% 0.092 155)",
+          "oklch(55% 0.110 155)",
+          "oklch(65% 0.092 155)",
+          "oklch(80% 0.064 155)",
+          "oklch(95% 0.037 155)"
+        ]
+      },
+      "basil-wash": {
+        "role": "status",
+        "displayName": "Basil Wash",
+        "canonical": "oklch(96% 0.025 155)",
+        "tonalRamp": [
+          "oklch(15% 0.008 155)",
+          "oklch(25% 0.013 155)",
+          "oklch(35% 0.017 155)",
+          "oklch(45% 0.021 155)",
+          "oklch(55% 0.025 155)",
+          "oklch(65% 0.021 155)",
+          "oklch(80% 0.015 155)",
+          "oklch(95% 0.008 155)"
+        ]
+      },
+      "amber-warning": {
+        "role": "status",
+        "displayName": "Amber Warning",
+        "canonical": "oklch(50% 0.11 65)",
+        "tonalRamp": [
+          "oklch(15% 0.037 65)",
+          "oklch(25% 0.055 65)",
+          "oklch(35% 0.073 65)",
+          "oklch(45% 0.092 65)",
+          "oklch(55% 0.110 65)",
+          "oklch(65% 0.092 65)",
+          "oklch(80% 0.064 65)",
+          "oklch(95% 0.037 65)"
+        ]
+      },
+      "amber-wash": {
+        "role": "status",
+        "displayName": "Amber Wash",
+        "canonical": "oklch(97% 0.03 85)",
+        "tonalRamp": [
+          "oklch(15% 0.010 85)",
+          "oklch(25% 0.015 85)",
+          "oklch(35% 0.020 85)",
+          "oklch(45% 0.025 85)",
+          "oklch(55% 0.030 85)",
+          "oklch(65% 0.025 85)",
+          "oklch(80% 0.017 85)",
+          "oklch(95% 0.010 85)"
+        ]
+      },
+      "star-amber": {
+        "role": "status",
+        "displayName": "Star Amber",
+        "canonical": "oklch(74% 0.16 75)",
+        "tonalRamp": [
+          "oklch(15% 0.053 75)",
+          "oklch(25% 0.080 75)",
+          "oklch(35% 0.107 75)",
+          "oklch(45% 0.133 75)",
+          "oklch(55% 0.160 75)",
+          "oklch(65% 0.133 75)",
+          "oklch(80% 0.093 75)",
+          "oklch(95% 0.053 75)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (phone)",
+        "purpose": "Promotional banner headlines, two lines, uppercase."
+      },
+      "display-desktop": {
+        "displayName": "Display (desktop)",
+        "purpose": "Same role from 1024px."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "The \"Seu negócio\" logotype, italic."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section, page and checkout step titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Product names and group titles."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Every price and total, tabular figures."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descriptions and running text."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Helper text, hints, card descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Badges and selos only, uppercase."
+      },
+      "display-tablet": {
+        "displayName": "Display (tablet)",
+        "purpose": "Banner headline from 640px."
+      },
+      "promo-title": {
+        "displayName": "Promo title",
+        "purpose": "Combo banner title (30/36/52px)."
+      },
+      "promo-title-tablet": {
+        "displayName": "Promo title (tablet)",
+        "purpose": "Combo banner title from 640px."
+      },
+      "promo-title-desktop": {
+        "displayName": "Promo title (desktop)",
+        "purpose": "Combo banner title from 1024px."
+      },
+      "sticker": {
+        "displayName": "Sticker",
+        "purpose": "Discount sticker number."
+      },
+      "sticker-desktop": {
+        "displayName": "Sticker (desktop)",
+        "purpose": "Discount sticker number from 1024px."
+      },
+      "sticker-off-desktop": {
+        "displayName": "Sticker OFF (desktop)",
+        "purpose": "OFF word of the sticker from 1024px."
+      },
+      "page-title-desktop": {
+        "displayName": "Page title (desktop)",
+        "purpose": "Page titles from 1024px."
+      },
+      "step-title-desktop": {
+        "displayName": "Step title (desktop)",
+        "purpose": "Checkout step titles from 1024px."
+      },
+      "headline-large": {
+        "displayName": "Headline large",
+        "purpose": "Section titles on desktop, confirmation title."
+      },
+      "headline-small": {
+        "displayName": "Headline small",
+        "purpose": "Section titles on phones."
+      },
+      "total": {
+        "displayName": "Total",
+        "purpose": "Total beside a bottom-pinned action."
+      },
+      "body-large": {
+        "displayName": "Body large",
+        "purpose": "Titles inside selectable cards."
+      },
+      "body-compact": {
+        "displayName": "Body compact",
+        "purpose": "Secondary list text, small buttons."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Hints, taglines, small qualifiers."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Nav labels and price qualifiers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "tile",
+        "value": "0 6px 18px -8px rgb(74 44 26 / 0.22), 0 1px 2px rgb(74 44 26 / 0.06)",
+        "purpose": "Header tiles, category tiles, search pill."
+      },
+      {
+        "name": "card",
+        "value": "0 10px 24px -14px rgb(74 44 26 / 0.24), 0 1px 3px rgb(74 44 26 / 0.06)",
+        "purpose": "Product cards, review cards, benefits strip."
+      },
+      {
+        "name": "raised",
+        "value": "0 12px 22px -8px rgb(184 16 43 / 0.5)",
+        "purpose": "Red center of the bottom bar, the OFF sticker."
+      },
+      {
+        "name": "bar",
+        "value": "0 -8px 24px -12px rgb(74 44 26 / 0.18)",
+        "purpose": "Bottom-pinned action bars."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Press feedback (160ms), toasts and bag bar entrance (260–300ms), centered dialogs (250ms)."
+      },
+      {
+        "name": "ease-drawer",
+        "value": "cubic-bezier(0.32, 0.72, 0, 1)",
+        "purpose": "Bottom sheets and side drawers (400ms)."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "opacity 200ms ease",
+        "purpose": "Replaces every travel when the visitor prefers reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action per screen; carries the price when it confirms a purchase.",
+      "html": "<button class=\"ds-btn-primary\"><span>Adicionar</span><span class=\"ds-tab\">R$ 52,90</span></button>",
+      "css": ".ds-btn-primary { font-family: 'Inter Variable', system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; height: 56px; padding: 0 22px; min-width: 260px; border: 0; border-radius: 9999px; background: var(--color-brand, #D71935); color: #fff; font-size: 16px; font-weight: 600; box-shadow: 0 8px 18px -10px rgb(184 16 43 / 0.8); cursor: pointer; transition: background-color 150ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-btn-primary:hover { background: var(--color-brand-dark, #B8102B); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid #202020; outline-offset: 2px; } .ds-tab { font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Second choice next to a primary (Cancelar, Limpar filtros).",
+      "html": "<button class=\"ds-btn-secondary\">Limpar busca e filtros</button>",
+      "css": ".ds-btn-secondary { font-family: 'Inter Variable', system-ui, sans-serif; height: 48px; padding: 0 20px; border: 1px solid #D9D1C9; border-radius: 9999px; background: #fff; color: #202020; font-size: 15px; font-weight: 600; cursor: pointer; transition: border-color 150ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-btn-secondary:hover { border-color: rgb(32 32 32 / 0.4); } .ds-btn-secondary:active { transform: scale(0.97); } .ds-btn-secondary:focus-visible { outline: 2px solid #202020; outline-offset: 2px; }"
+    },
+    {
+      "name": "Header Icon Tile",
+      "kind": "custom",
+      "refersTo": "icon-tile",
+      "description": "White rounded tile for menu, notifications and bag; red count badge only when there is something to count.",
+      "html": "<button class=\"ds-tile\" aria-label=\"Sacola, 2 itens\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16 10a4 4 0 0 1-8 0\"/><path d=\"M3.103 6.034h17.794\"/><path d=\"M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z\"/></svg><span class=\"ds-badge-count\">2</span></button>",
+      "css": ".ds-tile { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 14px; background: #fff; color: #202020; box-shadow: 0 6px 18px -8px rgb(74 44 26 / 0.22), 0 1px 2px rgb(74 44 26 / 0.06); cursor: pointer; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-tile:active { transform: scale(0.97); } .ds-tile:focus-visible { outline: 2px solid #202020; outline-offset: 2px; } .ds-badge-count { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 4px; display: grid; place-items: center; border-radius: 9999px; background: #D71935; color: #fff; font: 700 11px/1 system-ui, sans-serif; box-shadow: 0 0 0 2px #F7F3EF; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "Pill search with a leading magnifier; filters live in a separate white tile beside it.",
+      "html": "<label class=\"ds-search\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input type=\"search\" placeholder=\"Busque sua pizza favorita...\" /></label>",
+      "css": ".ds-search { position: relative; display: flex; align-items: center; width: 320px; height: 48px; padding: 0 16px; gap: 12px; border: 1px solid transparent; border-radius: 9999px; background: #fff; color: #202020; box-shadow: 0 6px 18px -8px rgb(74 44 26 / 0.22), 0 1px 2px rgb(74 44 26 / 0.06); } .ds-search:focus-within { border-color: #202020; box-shadow: 0 0 0 3px rgb(32 32 32 / 0.1); } .ds-search input { font-family: 'Inter Variable', system-ui, sans-serif; flex: 1; border: 0; outline: 0; background: transparent; font-size: 16px; color: #202020; } .ds-search input::placeholder { color: #6E6862; }"
+    },
+    {
+      "name": "Selectable Chip",
+      "kind": "chip",
+      "refersTo": "chip-selected",
+      "description": "Filters and categories; selected adds a red outline, red-deep label and a check.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg>Pizzas</button><button class=\"ds-chip\" aria-pressed=\"false\">Bebidas</button></div>",
+      "css": ".ds-chips { display: flex; gap: 8px; } .ds-chip { font-family: 'Inter Variable', system-ui, sans-serif; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; border: 1.5px solid #D9D1C9; border-radius: 9999px; background: #fff; color: #202020; font-size: 14px; font-weight: 500; cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease; } .ds-chip:hover { border-color: rgb(32 32 32 / 0.4); } .ds-chip[aria-pressed=\"true\"] { border-color: #D71935; background: #FDF0F2; color: #B8102B; } .ds-chip:focus-visible { outline: 2px solid #202020; outline-offset: 2px; }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "Fixed content order: photo with badge, name, two-line description, demo rating, price, red add button.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-photo\"><span class=\"ds-badge\">Mais vendido</span></div><h3 class=\"ds-card-title\">Pizza Suprema</h3><p class=\"ds-card-desc\">Calabresa, cogumelos, azeitonas, queijo e ingredientes selecionados.</p><div class=\"ds-card-foot\"><p class=\"ds-price\"><span>a partir de</span>R$ 42,90</p><button class=\"ds-add\" aria-label=\"Escolher opções de Pizza Suprema\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg></button></div></article>",
+      "css": ".ds-card { font-family: 'Inter Variable', system-ui, sans-serif; width: 200px; padding: 8px; border-radius: 16px; background: #fff; box-shadow: 0 10px 24px -14px rgb(74 44 26 / 0.24), 0 1px 3px rgb(74 44 26 / 0.06); } .ds-card-photo { position: relative; aspect-ratio: 5 / 4; border-radius: 12px; background: #EFE9E3; } .ds-badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; border-radius: 9999px; background: #D71935; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; } .ds-card-title { margin: 10px 6px 0; font-size: 15px; font-weight: 600; color: #202020; } .ds-card-desc { margin: 4px 6px 0; font-size: 13px; line-height: 1.35; color: #6E6862; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } .ds-card-foot { display: flex; align-items: flex-end; justify-content: space-between; margin: 10px 6px 4px; } .ds-price { margin: 0; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; color: #202020; } .ds-price span { display: block; font-size: 11px; font-weight: 500; color: #6E6862; } .ds-add { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 9999px; background: #D71935; color: #fff; box-shadow: 0 6px 14px -6px rgb(184 16 43 / 0.7); cursor: pointer; transition: background-color 150ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-add:hover { background: #B8102B; } .ds-add:active { transform: scale(0.97); } .ds-add:focus-visible { outline: 2px solid #202020; outline-offset: 2px; }"
+    },
+    {
+      "name": "Bottom Navigation",
+      "kind": "nav",
+      "refersTo": "bottom-nav",
+      "description": "Floating white bar with five items and a raised red center (Pedidos).",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item is-active\" href=\"#\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"/><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/></svg>Início</a><a class=\"ds-nav-item\" href=\"#\">Cardápio</a><a class=\"ds-nav-center\" href=\"#\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z\"/><path d=\"M14 8H8\"/><path d=\"M16 12H8\"/><path d=\"M13 16H8\"/></svg><span>Pedidos</span></a><a class=\"ds-nav-item\" href=\"#\">Ofertas</a><a class=\"ds-nav-item\" href=\"#\">Perfil</a></nav>",
+      "css": ".ds-nav { font-family: 'Inter Variable', system-ui, sans-serif; position: relative; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; width: 360px; height: 64px; margin-top: 30px; padding: 0 4px 10px; border-radius: 22px; background: #fff; box-shadow: 0 10px 30px -12px rgb(74 44 26 / 0.35), 0 1px 3px rgb(74 44 26 / 0.08); } .ds-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; color: #6E6862; text-decoration: none; } .ds-nav-item.is-active { color: #B8102B; font-weight: 700; } .ds-nav-item.is-active svg { color: #D71935; } .ds-nav-center { position: relative; justify-self: center; top: -14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 66px; height: 66px; border-radius: 9999px; background: #D71935; color: #fff; font-size: 11px; font-weight: 700; text-decoration: none; box-shadow: 0 12px 22px -8px rgb(184 16 43 / 0.5), 0 0 0 4px #F7F3EF; } .ds-nav a:focus-visible { outline: 2px solid #202020; outline-offset: 2px; }"
+    },
+    {
+      "name": "Floating Bag Bar",
+      "kind": "custom",
+      "refersTo": "bag-bar",
+      "description": "Signature: rises above the bottom bar once the bag has items; count and subtotal one tap away.",
+      "html": "<button class=\"ds-bagbar\"><span class=\"ds-bagbar-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16 10a4 4 0 0 1-8 0\"/><path d=\"M3.103 6.034h17.794\"/><path d=\"M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z\"/></svg></span><span class=\"ds-bagbar-text\"><strong>Ver sacola</strong><small>3 itens</small></span><span class=\"ds-bagbar-total\">R$ 146,70</span></button>",
+      "css": ".ds-bagbar { font-family: 'Inter Variable', system-ui, sans-serif; display: flex; align-items: center; gap: 12px; width: 360px; height: 56px; padding: 0 16px 0 8px; border: 0; border-radius: 16px; background: #202020; color: #fff; text-align: left; box-shadow: 0 14px 28px -12px rgb(23 17 15 / 0.55); cursor: pointer; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-bagbar:active { transform: scale(0.97); } .ds-bagbar:focus-visible { outline: 2px solid #202020; outline-offset: 2px; } .ds-bagbar-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #D71935; } .ds-bagbar-text { flex: 1; display: flex; flex-direction: column; line-height: 1.2; } .ds-bagbar-text strong { font-size: 15px; font-weight: 600; } .ds-bagbar-text small { font-size: 12px; color: rgb(255 255 255 / 0.75); } .ds-bagbar-total { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Neighborhood Pizzeria Counter",
+    "overview": "The interface is the counter of a busy neighborhood pizzeria translated into the ordering grammar Brazilians already know from delivery apps. The ground is flour-white and warm; everything the customer touches sits on it as a white plate: rounded tiles, cards and sheets lifted by soft, warm shadows. Pizzeria red is the only loud color and it always means \"do this\" or \"this is chosen\". The one dark surface, the oven-black promotional banner, is where the brand raises its voice with condensed uppercase lettering.\n\nDensity is that of a working app, not a landing page: search first, a category rail, a two-column grid of priced cards on phones, a fixed bottom bar, and a floating bag bar that rises once something is in the bag. Expression lives in a few precise details (the condensed display face, the red raised center of the bottom bar, real food photography) and never in layout tricks. Familiar beats novel; every control is a standard one.",
+    "keyCharacteristics": [
+      "Warm flour-white ground, white \"plates\" for every interactive surface.",
+      "One accent, pizzeria red, reserved for action, selection and price-critical state.",
+      "Condensed extrabold uppercase for promotional headlines and the wordmark only; Inter for everything operable.",
+      "Real food photography in rounded frames; no illustrations, no emoji.",
+      "Mobile first: bottom bar plus floating bag bar on phones; top bar with inline nav and search on desktop."
+    ],
+    "rules": [
+      {
+        "name": "The Red Means Act Rule",
+        "body": "Pizzeria red is never decoration. If it is red, it is an action, a selection, or a badge. Inactive states are ink or ink-muted, never pale red.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never Color Alone Rule",
+        "body": "Every state pairs color with a second signal: a check icon on selected chips, a ring plus bold label on the active category, an indicator bar plus bold label on the active tab, an icon plus text on errors.",
+        "section": "colors"
+      },
+      {
+        "name": "The Poster Stays On The Banner Rule",
+        "body": "Barlow Condensed never appears in controls, prices, forms or navigation. If it is clickable or must be read in a hurry, it is Inter.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Price Rule",
+        "body": "Prices, totals, quantities and counts use tabular figures so columns of values align.",
+        "section": "typography"
+      },
+      {
+        "name": "The Plate Rule",
+        "body": "Anything interactive is a white plate lifted off the flour ground. Flat text never pretends to be a button.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep pizzeria red (#D71935) for actions, selection and badges only.",
+      "Do show every paid option's price next to it (\"+ R$ 10,00\") and the live total on the confirming button.",
+      "Do separate subtotal, delivery fee and discount on their own lines before the total.",
+      "Do label demo data as demo where a customer could mistake it for real (ratings \"· demo\", \"Desconto demonstrativo\", demo order notices).",
+      "Do use Lucide icons at 1.8–2.2 stroke for every icon.",
+      "Do keep touch targets at 44px or larger and inputs at 16px text."
+    ],
+    "donts": [
+      "Don't use emoji anywhere, including the greeting; use a Lucide icon instead.",
+      "Don't put Barlow Condensed in buttons, prices, forms or navigation.",
+      "Don't add small uppercase eyebrow text above headings; a promotional label is a red pill selo instead.",
+      "Don't show counts or badges with invented numbers (notifications stay empty until a real feed exists).",
+      "Don't use Pizza Hut or iFood names, logos, roof shapes or packaging.",
+      "Don't stack a border and a wide shadow on the same card."
+    ]
+  }
+}
