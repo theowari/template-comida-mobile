@@ -6,16 +6,16 @@ import { ComboBanner } from '../components/home/ComboBanner';
 import { DemoFootnote } from '../components/home/DemoFootnote';
 import { PageHeader } from '../components/layout/Header';
 import { Button } from '../components/ui/Button';
-import { products } from '../data/products';
 import { coupons } from '../data/promotions';
 import { useCart } from '../hooks/useCart';
 import { useOverlay } from '../hooks/useOverlay';
+import { useTheme } from '../hooks/useTheme';
 import { useToast } from '../hooks/useToast';
 import { formatBRL } from '../lib/format';
 
-const combos = products.filter((product) => product.categoryId === 'combos' && product.available);
-
 export function Offers() {
+  const { theme } = useTheme();
+  const combos = theme.catalog.products.filter((product) => product.categoryId === 'combos' && product.available);
   const location = useLocation();
   const { applyCoupon } = useCart();
   const toast = useToast();
@@ -54,11 +54,11 @@ export function Offers() {
         <ComboBanner />
 
         <ProductSection id="combos" title="Combos">
-          <ProductGrid products={combos} columns={3} />
+          <ProductGrid products={combos} columns={3} slotKeys />
         </ProductSection>
 
         <section id="cupons" aria-labelledby="cupons-titulo" className="scroll-mt-24">
-          <h2 id="cupons-titulo" className="text-xl font-bold tracking-[-0.015em] lg:text-2xl">
+          <h2 id="cupons-titulo" className="font-heading text-xl font-bold tracking-[-0.015em] lg:text-2xl">
             Cupons
           </h2>
           <p className="mt-1 text-[14px] text-ink-2">Cupons demonstrativos. O desconto aparece separado no resumo da sacola.</p>

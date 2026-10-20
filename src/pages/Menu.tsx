@@ -7,16 +7,18 @@ import { DemoFootnote } from '../components/home/DemoFootnote';
 import { PageHeader } from '../components/layout/Header';
 import { Button } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/EmptyState';
-import { categoryName, menuSectionOrder } from '../data/categories';
 import { useCatalogFilters } from '../hooks/useCatalogFilters';
+import { useTheme } from '../hooks/useTheme';
 import { isRefining } from '../lib/catalog';
 import { pluralize } from '../lib/format';
+import { categoryName } from '../themes';
 
 export function Menu() {
   const { filters, results, resetFilters } = useCatalogFilters();
+  const { theme } = useTheme();
   const refining = isRefining(filters);
 
-  const sections = menuSectionOrder
+  const sections = theme.catalog.menuSectionOrder
     .map((categoryId) => ({ categoryId, items: results.filter((product) => product.categoryId === categoryId) }))
     .filter((section) => section.items.length > 0);
 
@@ -57,8 +59,9 @@ export function Menu() {
           </ProductSection>
         ) : (
           sections.map((section, index) => (
-            <ProductSection key={section.categoryId} id={`secao-${section.categoryId}`} title={categoryName(section.categoryId)}>
-              <ProductGrid products={section.items} mobileLayout="row" priorityCount={index === 0 ? 3 : 0} />
+            // Keyed by position: on a theme change the sections stay and their photos crossfade.
+            <ProductSection key={index} id={`secao-${section.categoryId}`} title={categoryName(section.categoryId)}>
+              <ProductGrid products={section.items} mobileLayout="row" priorityCount={index === 0 ? 3 : 0} slotKeys />
             </ProductSection>
           ))
         )}

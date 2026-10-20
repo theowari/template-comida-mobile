@@ -1,6 +1,7 @@
-import { railCategories } from '../../data/categories';
 import { useCatalogFilters } from '../../hooks/useCatalogFilters';
+import { useTheme } from '../../hooks/useTheme';
 import { cn } from '../../lib/cn';
+import { railCategories } from '../../themes';
 import type { CategoryFilter } from '../../types';
 import { FoodImage } from '../ui/FoodImage';
 
@@ -14,6 +15,7 @@ interface CategoryListProps {
 /** Category rail. Selecting a category filters the product list in place. */
 export function CategoryList({ variant = 'tiles', onSelect, className }: CategoryListProps) {
   const { filters, setFilters } = useCatalogFilters();
+  const { theme } = useTheme();
 
   const select = (id: CategoryFilter) => {
     setFilters({ category: id });
@@ -28,10 +30,11 @@ export function CategoryList({ variant = 'tiles', onSelect, className }: Categor
           variant === 'tiles' ? 'gap-2.5 py-1.5 lg:mx-0 lg:gap-4 lg:px-0' : 'gap-2 py-1',
         )}
       >
-        {railCategories.map((category) => {
+        {railCategories(theme).map((category, slot) => {
           const active = filters.category === category.id;
           return (
-            <li key={category.id} className="shrink-0">
+            // Keyed by position: on a theme change each tile stays and its photo crossfades.
+            <li key={slot} className="shrink-0">
               {variant === 'tiles' ? (
                 <button
                   type="button"

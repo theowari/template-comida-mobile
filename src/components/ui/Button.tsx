@@ -10,7 +10,7 @@ const base =
   'press inline-flex items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap transition-[background-color,border-color,color,opacity] duration-150 disabled:opacity-45 aria-disabled:opacity-45';
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-brand text-white hover:bg-brand-dark active:bg-brand-dark shadow-[0_8px_18px_-10px_rgb(184_16_43/0.8)]',
+  primary: 'bg-brand text-white hover:bg-brand-dark active:bg-brand-dark shadow-brand',
   secondary: 'border border-line-strong bg-surface text-ink hover:border-ink/40 active:bg-ground-2',
   ghost: 'text-brand-dark hover:bg-brand-50 active:bg-brand-50',
   dark: 'bg-ink text-white hover:bg-black active:bg-black',

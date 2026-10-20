@@ -4,6 +4,7 @@ import { useFavorites } from '../../hooks/useFavorites';
 import { useProductActions } from '../../hooks/useProductActions';
 import { cn } from '../../lib/cn';
 import { formatBRL, formatRating } from '../../lib/format';
+import { imageSizes } from '../../lib/imageSizes';
 import { discountPercent, hasVariablePrice, requiresChoice, startingPrice } from '../../lib/pricing';
 import type { Product, ProductBadge } from '../../types';
 import { FoodImage } from '../ui/FoodImage';
@@ -52,7 +53,7 @@ export function ProductCard({ product, layout = 'card', priority, headingLevel =
 
   if (layout === 'row') {
     return (
-      <article className="relative flex gap-3 rounded-card bg-surface p-3 shadow-card transition-shadow hover:shadow-[0_14px_30px_-16px_rgb(74_44_26/0.32)]">
+      <article className="relative flex gap-3 rounded-card bg-surface p-3 shadow-card transition-shadow hover:shadow-card-hover">
         <div className="flex min-w-0 flex-1 flex-col">
           {badge ? <div className="mb-1.5 flex">{badge}</div> : null}
           {title}
@@ -65,7 +66,7 @@ export function ProductCard({ product, layout = 'card', priority, headingLevel =
         <div className="relative size-[108px] shrink-0">
           <FoodImage
             image={product.image}
-            sizes="108px"
+            sizes={imageSizes.row}
             priority={priority}
             className="size-full rounded-xl bg-ground-2 object-cover"
           />
@@ -77,11 +78,11 @@ export function ProductCard({ product, layout = 'card', priority, headingLevel =
   }
 
   return (
-    <article className="relative flex flex-col rounded-card bg-surface p-2 shadow-card transition-shadow hover:shadow-[0_14px_30px_-16px_rgb(74_44_26/0.32)]">
+    <article className="relative flex flex-col rounded-card bg-surface p-2 shadow-card transition-shadow hover:shadow-card-hover">
       <div className="relative aspect-[5/4] overflow-hidden rounded-xl bg-ground-2">
         <FoodImage
           image={product.image}
-          sizes="(min-width: 1024px) 300px, (min-width: 640px) 31vw, 46vw"
+          sizes={imageSizes.card}
           priority={priority}
           className="absolute inset-0 size-full object-cover"
         />
@@ -149,7 +150,7 @@ export function FavoriteButton({ product, className, small }: FavoriteButtonProp
       aria-label={`Favoritar ${product.name}`}
       onClick={() => toggle(product.id)}
       className={cn(
-        'press z-[2] grid place-items-center rounded-full bg-surface/95 shadow-[0_2px_8px_rgb(23_17_15/0.14)] transition-colors before:absolute before:-inset-1 hover:bg-surface',
+        'press z-[2] grid place-items-center rounded-full bg-surface/95 shadow-float transition-colors before:absolute before:-inset-1 hover:bg-surface',
         small ? 'size-8' : 'size-9',
         className,
       )}
@@ -181,7 +182,7 @@ export function AddButton({ product, onAdd, className }: AddButtonProps) {
       onClick={onAdd}
       aria-label={needsChoice ? `Escolher opções de ${product.name}` : `Adicionar ${product.name} à sacola`}
       className={cn(
-        'press z-[2] grid size-10 shrink-0 place-items-center rounded-full bg-brand text-white shadow-[0_6px_14px_-6px_rgb(184_16_43/0.7)] transition-colors before:absolute before:-inset-1 hover:bg-brand-dark',
+        'press z-[2] grid size-10 shrink-0 place-items-center rounded-full bg-brand text-white shadow-brand-sm transition-colors before:absolute before:-inset-1 hover:bg-brand-dark',
         className,
       )}
     >

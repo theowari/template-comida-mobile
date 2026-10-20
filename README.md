@@ -2,6 +2,8 @@
 
 Loja própria de pizzas e lanches, mobile first, com a jornada de compra que o público brasileiro já conhece dos apps de delivery: busca, categorias, personalização com preço ao vivo, sacola persistente e checkout em etapas.
 
+O mesmo template se transforma em outros segmentos: uma faixa no topo de todas as páginas troca o site, sem recarregar, entre **Pizzaria** (a identidade original), **Confeitaria**, **Cafeteria** e **Açaíteria**. Mudam cores, tipografia, fotos e textos da marca; a estrutura continua a mesma. Veja [Temas](#temas-um-site-quatro-marcas).
+
 > **Ambiente de demonstração.** Cardápio, preços, avaliações, promoções, horários e pedidos são fictícios. Nenhum pedido é enviado à loja e nenhum pagamento é processado. Tudo isso está identificado na interface.
 
 ## Como rodar
@@ -27,13 +29,16 @@ Para testar num celular: rode `npm run dev`, conecte o celular na mesma rede e a
 - **Sacola:** editar personalização, mudar quantidade, remover com "Desfazer", limpar com confirmação, cupom (com motivo claro quando não vale), subtotal, taxa e desconto em linhas separadas, aviso de pedido mínimo. Persiste no `localStorage` e sincroniza entre abas.
 - **Checkout em 4 etapas:** dados (nome e celular), entrega ou retirada (CEP preenche o endereço via ViaCEP), pagamento (Pix, cartão na entrega, dinheiro com troco validado) e revisão, com "Alterar" que volta direto para a revisão. Depois vem a confirmação.
 - **Pedidos, Ofertas, Perfil e Favoritos:** histórico local dos pedidos demonstrativos, combos e cupons, dados salvos no aparelho (com opção de apagar), favoritos.
+- **Temas:** faixa "Ver este site como" com seletor de segmento (paleta de cada tema no próprio seletor), transição animada entre as marcas, link direto por segmento (`?tema=cafeteria`). Cada tema tem a própria sacola, favoritos e histórico de pedidos.
 - **Navegação:** barra inferior com o "Pedidos" central em destaque, barra flutuante "Ver sacola" (padrão de apps de delivery), cabeçalho completo no desktop. Sheets e menus ficam na URL, então o botão voltar do celular fecha o sheet em vez de sair da página.
 
 ## Estrutura
 
 ```
 src/
-  data/          catálogo, categorias, promoções, configuração da loja, registro de imagens
+  themes/        os quatro temas: uma pasta por segmento (catálogo, categorias, banners, fotos, textos da marca),
+                 registro dos temas, pré-carregamento e os tokens de cada tema (themes.css)
+  data/          dados compartilhados por todos os temas: configuração da loja, pagamentos, benefícios, cupons
   lib/           regras de negócio puras (preços, sacola, busca, checkout, máscaras, CEP)
   services/      contratos de pedidos e pagamento + implementação demonstrativa
   hooks/         estado compartilhado (sacola, favoritos, filtros, rascunho do checkout, toasts, overlays)
@@ -43,7 +48,7 @@ src/
     cart/        sacola, cupom, resumo de valores
     checkout/    etapas do checkout
     home/        banners, benefícios, informações de entrega
-    layout/      cabeçalhos, barra inferior, barra da sacola, menu, notificações
+    layout/      cabeçalhos, faixa de temas, barra inferior, barra da sacola, menu, notificações
   pages/         Início, Cardápio, Pedidos, Ofertas, Perfil, Favoritos, Checkout, Confirmação
 ```
 
@@ -53,13 +58,38 @@ O design system está documentado em [DESIGN.md](DESIGN.md) (tokens, tipografia,
 
 | O quê | Onde |
 |---|---|
-| Produtos, preços, opções, badges, avaliações | [src/data/products.ts](src/data/products.ts) |
-| Categorias | [src/data/categories.ts](src/data/categories.ts) |
-| Banners, combos, cupons | [src/data/promotions.ts](src/data/promotions.ts) |
-| Taxa, tempo estimado, pedido mínimo, horários, formas de pagamento, benefícios, modo demonstração | [src/data/store.ts](src/data/store.ts) |
-| Fotos (com a origem Unsplash de cada uma) | [src/data/images.ts](src/data/images.ts) e `public/images/` |
+| Produtos, preços, opções, badges, avaliações | `src/themes/<tema>/products.ts` (Pizzaria: [src/themes/pizzaria/products.ts](src/themes/pizzaria/products.ts)) |
+| Categorias e ordem das seções do cardápio | `src/themes/<tema>/categories.ts` |
+| Nome, slogan, horários, banners do topo, banner de combos | `src/themes/<tema>/index.ts` |
+| Fotos (com a origem Unsplash de cada uma) | `src/themes/<tema>/images.ts` e `public/images/` (Pizzaria) ou `public/images/themes/<tema>/` |
+| Cores e tipografia | Pizzaria: [src/index.css](src/index.css) (`@theme`); demais: [src/themes/themes.css](src/themes/themes.css) |
+| Cupons (valem para todos os temas) | [src/data/promotions.ts](src/data/promotions.ts) |
+| Taxa, tempo estimado, pedido mínimo, endereço de retirada, formas de pagamento, benefícios, modo demonstração | [src/data/store.ts](src/data/store.ts) |
 
 Para esconder as avaliações demonstrativas, use `showDemoRatings: false` em `store.ts`. Para retirar os avisos de demonstração, use `demoMode: false`, mas só depois de ligar um backend real.
+
+## Temas: um site, quatro marcas
+
+| Tema | Marca | Paleta | Tipografia |
+|---|---|---|---|
+| Pizzaria (padrão) | Seu negócio | vermelho, farinha, forno | Barlow Condensed + Inter |
+| Confeitaria | Ateliê Doce | framboesa, blush, vinho-chocolate | Bodoni Moda + Figtree |
+| Cafeteria | Grão & Prosa | cobre, areia, torra escura | Besley + Hanken Grotesk |
+| Açaíteria | Roxo Açaí | violeta, lavanda, polpa de açaí com destaque lima | Bricolage Grotesque + Onest |
+
+- **Sempre começa na Pizzaria.** Para mandar a versão de um segmento a um cliente, use o link com `?tema=`: `/?tema=confeitaria`, `/?tema=cafeteria`, `/?tema=acaiteria`.
+- **Como funciona:** os tokens de cor e tipografia ficam em `<html data-theme="…">`. Os componentes só leem tokens, então a troca não toca na estrutura. Na troca, as cores fazem a transição juntas (480 ms), cada foto faz crossfade só depois que a nova está carregada (sem quadro vazio), e as fontes do tema novo são carregadas antes. Com "reduzir movimento" ativo, tudo vira um fade de 200 ms.
+- **Sacola, favoritos e pedidos são por tema**, como lojas diferentes. A Pizzaria continua usando as mesmas chaves do `localStorage` de antes, então sacolas já salvas não se perdem.
+- **Os nomes Ateliê Doce, Grão & Prosa e Roxo Açaí são fictícios**, como todo o cardápio de demonstração.
+
+### Adicionar um quinto segmento
+
+1. Copie uma pasta de tema (por exemplo `src/themes/cafeteria/`) e troque produtos, categorias, banners, textos da marca e fotos. Ids de produto não podem se repetir entre temas, e uma categoria com o mesmo id em dois temas precisa ter o mesmo nome (os testes conferem).
+2. Coloque as fotos em `public/images/themes/<tema>/` nos tamanhos dos outros temas (produtos 400/800 px quadrados, banners 800×600 e 1400×1050, categorias 192 px), cada uma com o `.json` de origem.
+3. Acrescente o bloco `[data-theme='<tema>']` em [src/themes/themes.css](src/themes/themes.css) com os mesmos tokens dos outros temas, importe as fontes em [src/main.tsx](src/main.tsx) e confira o contraste.
+4. Adicione o id em `ThemeId` ([src/themes/types.ts](src/themes/types.ts)) e o tema na lista de [src/themes/index.ts](src/themes/index.ts).
+
+Nenhum componente precisa mudar. `npm test` confere se cada tema preenche os mesmos espaços do template, se todas as fotos existem e se as cores do seletor batem com os tokens.
 
 ## O que ainda depende de backend
 
@@ -103,10 +133,11 @@ As convenções de interface acima seguem o que o público conhece de apps de de
 ## Verificação feita
 
 - `npm run build`: tipos sem erros e build de produção OK.
-- `npm test`: 32 testes passando (preços, cupons, sacola, busca, máscaras, validação do checkout e card de produto).
+- `npm test`: 64 testes passando (preços, cupons, sacola, busca, máscaras, validação do checkout, card de produto, e os temas: espaços do template preenchidos, fotos existentes, cores do seletor iguais aos tokens, desconto do banner igual ao dos combos, seletor por mouse e teclado, sacola separada por tema).
+- **Temas, no navegador headless (Edge):** a Pizzaria ficou idêntica pixel a pixel à versão anterior (com a faixa de temas ocultada) em início, cardápio, ofertas, perfil, pedidos e favoritos, a 390 px e 1440 px; as únicas diferenças medidas são de decodificação das fotos, que a versão anterior também tem entre duas capturas dela mesma. Os quatro temas a 360, 390, 430, 768 e 1440 px (início, cardápio e ofertas), sem rolagem horizontal, sem nome da marca vazando do cabeçalho, sem imagem quebrada e sem erro no console; transição gravada quadro a quadro em câmera lenta; troca repetida e interrompida termina no último tema escolhido; "reduzir movimento" encurta tudo para 200 ms.
 - Navegador headless (Chromium), em 390 px, 360 px, 768 px, 1280 px e 1440 px: busca parcial, busca sem resultado, categoria, filtros combinados e remoção individual, validação de opção obrigatória, preço calculado (2 × Suprema grande com borda e bacon = R$ 129,80), adição rápida, persistência após recarregar, cupom com teto (R$ 15,00), desfazer remoção, editar item, checkout completo com CEP real via ViaCEP, troco inválido, editar a partir da revisão, confirmação, favoritos, botão voltar fechando o menu, ordem de tabulação, Esc fechando o sheet com foco devolvido ao card. Sem rolagem horizontal em nenhuma largura e sem erros no console.
 - **Não verificado em aparelho real:** safe areas (notch e barra de gestos), teclado virtual e sensação de toque precisam ser conferidos num celular físico.
 
 ## Imagens
 
-Todas as fotos são da [Unsplash](https://unsplash.com) (Licença Unsplash). Elas foram baixadas para `public/images/`, para o site não depender de CDN externo. O id de origem de cada foto está em [src/data/images.ts](src/data/images.ts) e no `.json` ao lado de cada arquivo.
+Todas as fotos são da [Unsplash](https://unsplash.com) (Licença Unsplash, só fotos gratuitas, nenhuma Unsplash+). Elas foram baixadas para `public/images/` (Pizzaria) e `public/images/themes/<tema>/`, para o site não depender de CDN externo. O id de origem de cada foto está no `images.ts` de cada tema e no `.json` ao lado de cada arquivo. Fotos com marcas de terceiros visíveis (embalagens de café, copos de redes de açaí) foram descartadas na seleção.

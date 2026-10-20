@@ -1,10 +1,13 @@
 @import 'tailwindcss';
+@import './themes/themes.css';
 
 /* ------------------------------------------------------------------
-   Design tokens: Seu negócio
+   Design tokens: Seu negócio (Pizzaria, the default theme).
+   The other themes override these in src/themes/themes.css.
    ------------------------------------------------------------------ */
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-heading: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Barlow Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
 
   --color-brand: #d71935;
@@ -15,13 +18,16 @@
 
   --color-ground: #f7f3ef;
   --color-ground-2: #efe9e3;
+  --color-ground-sticky: #f6f1ec; /* sticky option-group headers in the product sheet */
   --color-surface: #ffffff;
+  --color-surface-hover: #fffdfb;
   --color-ink: #202020;
   --color-ink-2: #6e6862; /* brief's #777 darkened for 4.5:1 on the warm ground */
   --color-line: #eae5e0;
   --color-line-strong: #d9d1c9;
   --color-oven: #17110f;
   --color-blush: #fbe7e4;
+  --color-blush-ink: #5d4b47; /* secondary text on the blush field */
 
   --color-success: #1e7f4f;
   --color-success-50: #e8f5ee;
@@ -33,10 +39,21 @@
   --radius-card: 16px;
   --radius-sheet: 24px;
 
-  --shadow-tile: 0 6px 18px -8px rgb(74 44 26 / 0.22), 0 1px 2px rgb(74 44 26 / 0.06);
-  --shadow-card: 0 10px 24px -14px rgb(74 44 26 / 0.24), 0 1px 3px rgb(74 44 26 / 0.06);
-  --shadow-raised: 0 12px 22px -8px rgb(184 16 43 / 0.5);
-  --shadow-bar: 0 -8px 24px -12px rgb(74 44 26 / 0.18);
+  /* Shadows are tinted from the theme: --shade (warm neutral), brand-dark, or oven. */
+  --shadow-tile: 0 6px 18px -8px color-mix(in srgb, var(--shade) 22%, transparent), 0 1px 2px color-mix(in srgb, var(--shade) 6%, transparent);
+  --shadow-tile-hover: 0 10px 22px -10px color-mix(in srgb, var(--shade) 30%, transparent), 0 1px 2px color-mix(in srgb, var(--shade) 6%, transparent);
+  --shadow-lift: 0 10px 22px -10px color-mix(in srgb, var(--shade) 30%, transparent);
+  --shadow-card: 0 10px 24px -14px color-mix(in srgb, var(--shade) 24%, transparent), 0 1px 3px color-mix(in srgb, var(--shade) 6%, transparent);
+  --shadow-card-hover: 0 14px 30px -16px color-mix(in srgb, var(--shade) 32%, transparent);
+  --shadow-nav: 0 10px 30px -12px color-mix(in srgb, var(--shade) 35%, transparent), 0 1px 3px color-mix(in srgb, var(--shade) 8%, transparent);
+  --shadow-bar: 0 -8px 24px -12px color-mix(in srgb, var(--shade) 18%, transparent);
+  --shadow-raised: 0 12px 22px -8px color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
+  --shadow-brand: 0 8px 18px -10px color-mix(in srgb, var(--color-brand-dark) 80%, transparent);
+  --shadow-brand-sm: 0 6px 14px -6px color-mix(in srgb, var(--color-brand-dark) 70%, transparent);
+  --shadow-float: 0 2px 8px color-mix(in srgb, var(--color-oven) 14%, transparent);
+  --shadow-float-strong: 0 2px 10px color-mix(in srgb, var(--color-oven) 18%, transparent);
+  --shadow-dock: 0 14px 28px -12px color-mix(in srgb, var(--color-oven) 55%, transparent);
+  --shadow-toast: 0 16px 32px -12px color-mix(in srgb, var(--color-oven) 50%, transparent);
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
@@ -161,6 +178,36 @@
   }
 }
 
+/*
+ * Display voice (banner headlines, promo titles, stickers): family, weight,
+ * case, tracking and leading come from the theme. Set the size with
+ * [--display-size:29px]; the theme's --display-scale evens out face widths.
+ */
+@utility type-display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+  text-transform: var(--display-case);
+  letter-spacing: var(--display-tracking);
+  line-height: var(--display-leading);
+  font-size: calc(var(--display-size, 1em) * var(--display-scale));
+}
+
+/* Second headline line: italic where the theme wants an accent (Confeitaria). */
+@utility type-display-accent {
+  font-style: var(--display-accent-style);
+}
+
+/* --fit is set by the Logo only when a long name would overflow its slot. */
+@utility type-wordmark {
+  font-family: var(--font-display);
+  font-weight: var(--wordmark-weight);
+  font-style: var(--wordmark-style);
+  letter-spacing: var(--wordmark-tracking);
+  line-height: 1;
+  font-size: calc(var(--display-size, 1em) * var(--wordmark-scale) * var(--fit, 1));
+}
+
 /* ------------------------------------------------------------------
    Sheets (native <dialog>): bottom sheet on phones, then
    centered dialog or side drawer from the large breakpoint.
@@ -176,7 +223,7 @@
 .sheet-backdrop {
   position: absolute;
   inset: 0;
-  background: rgb(23 17 15 / 0.48);
+  background: color-mix(in srgb, var(--color-oven) 48%, transparent);
   opacity: 0;
   transition: opacity 400ms var(--ease-drawer);
 }
@@ -190,7 +237,7 @@
   display: flex;
   flex-direction: column;
   background: var(--color-surface);
-  box-shadow: 0 -12px 40px -16px rgb(23 17 15 / 0.35);
+  box-shadow: 0 -12px 40px -16px color-mix(in srgb, var(--color-oven) 35%, transparent);
   transition:
     transform 400ms var(--ease-drawer),
     opacity 400ms var(--ease-drawer);
@@ -332,6 +379,27 @@
   }
   .press:active:not(:disabled) {
     transform: none;
+  }
+}
+
+/* Theme menu: grows from its trigger (top right). Closing is instant. */
+.theme-menu {
+  transform-origin: top right;
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-menu {
+    transform: none;
+    @starting-style {
+      transform: none;
+    }
   }
 }
 

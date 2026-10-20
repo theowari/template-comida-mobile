@@ -3,6 +3,7 @@ import { NavLink } from 'react-router';
 import { store } from '../../data/store';
 import { useFavorites } from '../../hooks/useFavorites';
 import { useOverlay } from '../../hooks/useOverlay';
+import { useTheme } from '../../hooks/useTheme';
 import { cn } from '../../lib/cn';
 import { formatBRL } from '../../lib/format';
 import { Logo } from '../ui/Logo';
@@ -12,6 +13,7 @@ import { drawerNav } from './navigation';
 export function NavDrawer() {
   const overlay = useOverlay('menu');
   const { ids } = useFavorites();
+  const { theme } = useTheme();
 
   return (
     <Sheet open={overlay.isOpen} onClose={overlay.close} labelledBy="menu-titulo" variant="left">
@@ -72,7 +74,7 @@ export function NavDrawer() {
               <Clock className="mt-0.5 size-4 shrink-0 text-ink-2" aria-hidden />
               <div>
                 <dt className="sr-only">Horário</dt>
-                <dd>{store.openingHours}</dd>
+                <dd>{theme.brand.openingHours}</dd>
               </div>
             </div>
             <div className="flex gap-2.5">

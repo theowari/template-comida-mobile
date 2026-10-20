@@ -1,10 +1,11 @@
-import { createContext, use, useCallback, useEffect, useMemo, useReducer, type ReactNode } from 'react';
-import { getProduct } from '../data/products';
+import { createContext, use, useCallback, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react';
 import { cartReducer, emptyCart, type CartState } from '../lib/cart';
 import { computeTotals, evaluateCoupon, isValidSelection, type CartTotals, type CouponStatus } from '../lib/pricing';
 import { readStorage, storageKeys, writeStorage } from '../lib/storage';
+import { getProduct, themeStorageKey } from '../themes';
 import type { CartItem, Selections } from '../types';
 import { useCheckoutDraft } from './useCheckoutDraft';
+import { useTheme } from './useTheme';
 
 interface CartContextValue {
   items: CartItem[];
@@ -40,20 +41,34 @@ function sanitize(state: CartState): CartState {
   };
 }
 
-const loadCart = () => sanitize(readStorage<CartState>(storageKeys.cart, emptyCart));
+const loadCart = (key: string) => sanitize(readStorage<CartState>(key, emptyCart));
 
+/** One bag per theme: each brand is its own store. */
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(cartReducer, undefined, loadCart);
+  const { theme } = useTheme();
+  const key = themeStorageKey(storageKeys.cart, theme.id);
+  const [state, dispatch] = useReducer(cartReducer, key, loadCart);
+  const [loadedKey, setLoadedKey] = useState(key);
   const { draft } = useCheckoutDraft();
 
+  // Theme changed: show that brand's bag in this same render, never the previous one.
+  if (loadedKey !== key) {
+    setLoadedKey(key);
+    dispatch({ type: 'hydrate', state: loadCart(key) });
+  }
+
   useEffect(() => {
-    writeStorage(storageKeys.cart, state);
-  }, [state]);
+    writeStorage(loadedKey, state);
+  }, [state, loadedKey]);
 
   // Keep several open tabs in sync.
+  const keyRef = useRef(loadedKey);
+  useEffect(() => {
+    keyRef.current = loadedKey;
+  }, [loadedKey]);
   useEffect(() => {
     const onStorage = (event: StorageEvent) => {
-      if (event.key === storageKeys.cart) dispatch({ type: 'hydrate', state: loadCart() });
+      if (event.key === keyRef.current) dispatch({ type: 'hydrate', state: loadCart(keyRef.current) });
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);

@@ -3,8 +3,8 @@ import { ProductGrid } from '../components/catalog/ProductSection';
 import { PageHeader } from '../components/layout/Header';
 import { ButtonLink } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/EmptyState';
-import { getProduct } from '../data/products';
 import { useFavorites } from '../hooks/useFavorites';
+import { getProduct } from '../themes';
 import type { Product } from '../types';
 
 export function Favorites() {

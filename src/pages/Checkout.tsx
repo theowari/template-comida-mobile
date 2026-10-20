@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router';
 import { OrderSummary } from '../components/cart/OrderSummary';
 import { CheckoutProgress } from '../components/checkout/CheckoutProgress';
+import { ThemeBar } from '../components/layout/ThemeBar';
 import { ContactStep } from '../components/checkout/ContactStep';
 import { DeliveryStep } from '../components/checkout/DeliveryStep';
 import { PaymentStep } from '../components/checkout/PaymentStep';
@@ -11,15 +12,16 @@ import { Button, ButtonLink } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/EmptyState';
 import { LogoMark } from '../components/ui/Logo';
 import { Notice } from '../components/ui/Notice';
-import { getProduct } from '../data/products';
 import { store } from '../data/store';
 import { useCart } from '../hooks/useCart';
 import { useCheckoutDraft } from '../hooks/useCheckoutDraft';
+import { useTheme } from '../hooks/useTheme';
 import { checkoutSteps, firstIncompleteStep, stepIsValid, type StepId } from '../lib/checkout';
 import { formatBRL } from '../lib/format';
 import { describeSelections, lineTotal, unitPrice } from '../lib/pricing';
 import { orderService } from '../services/orders';
 import { paymentProvider } from '../services/payments';
+import { getProduct } from '../themes';
 import type { OrderLine } from '../types';
 
 interface CheckoutLocationState {
@@ -32,6 +34,7 @@ interface CheckoutLocationState {
 export function Checkout() {
   const cart = useCart();
   const { draft } = useCheckoutDraft();
+  const { theme } = useTheme();
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -93,6 +96,7 @@ export function Checkout() {
         ];
       });
       const order = await orderService.createOrder({
+        theme: theme.id,
         customer: draft.customer,
         mode: draft.mode,
         address: draft.mode === 'entrega' ? draft.address : null,
@@ -128,7 +132,8 @@ export function Checkout() {
 
   if (cart.items.length === 0) {
     return (
-      <div className="min-h-dvh pt-safe">
+      <div className="min-h-dvh">
+        <ThemeBar />
         <CheckoutTopBar onBack={goBack} />
         <EmptyState icon={ShoppingBag} title="Sua sacola está vazia" className="pt-16" actions={<ButtonLink to="/cardapio">Ver cardápio</ButtonLink>}>
           Adicione produtos para finalizar um pedido.
@@ -145,6 +150,7 @@ export function Checkout() {
 
   return (
     <div className="min-h-dvh">
+      <ThemeBar />
       <div className="sticky top-0 z-30 border-b border-line bg-ground pt-safe">
         <CheckoutTopBar onBack={goBack} subtitle={`Etapa ${currentIndex + 1} de ${checkoutSteps.length} · ${step.label}`} />
         <div className="mx-auto max-w-[1080px] px-4 pb-3 lg:px-8">
@@ -158,7 +164,7 @@ export function Checkout() {
             id="etapa-titulo"
             ref={headingRef}
             tabIndex={-1}
-            className="mb-4 text-[22px] leading-tight font-bold tracking-[-0.02em] focus-visible:outline-none lg:text-[26px]"
+            className="mb-4 font-heading text-[22px] leading-tight font-bold tracking-[-0.02em] focus-visible:outline-none lg:text-[26px]"
           >
             {step.title}
           </h2>
@@ -246,6 +252,7 @@ export function Checkout() {
 }
 
 function CheckoutTopBar({ onBack, subtitle }: { onBack: () => void; subtitle?: string }) {
+  const { theme } = useTheme();
   return (
     <div className="mx-auto flex h-16 max-w-[1080px] items-center gap-2 px-2 lg:px-6">
       <button
@@ -260,7 +267,7 @@ function CheckoutTopBar({ onBack, subtitle }: { onBack: () => void; subtitle?: s
         <h1 className="text-[17px] leading-tight font-bold">Finalizar pedido</h1>
         {subtitle ? <p className="truncate text-[13px] text-ink-2">{subtitle}</p> : null}
       </div>
-      <Link to="/" aria-label={`${store.name}, voltar ao início`} className="mr-2 hidden rounded-md lg:block">
+      <Link to="/" aria-label={`${theme.brand.name.join(' ')}, voltar ao início`} className="mr-2 hidden rounded-md lg:block">
         <LogoMark className="size-9" />
       </Link>
     </div>

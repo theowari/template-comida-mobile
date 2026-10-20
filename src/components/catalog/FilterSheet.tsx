@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { railCategories } from '../../data/categories';
-import { products } from '../../data/products';
 import { useCatalogFilters } from '../../hooks/useCatalogFilters';
 import { useOverlay } from '../../hooks/useOverlay';
+import { useTheme } from '../../hooks/useTheme';
+import { railCategories } from '../../themes';
 import { filterProducts, priceRangeOptions, sortOptions } from '../../lib/catalog';
 import { cn } from '../../lib/cn';
 import { pluralize } from '../../lib/format';
@@ -14,6 +14,8 @@ import { Sheet, SheetFooter, SheetHeader } from '../ui/Sheet';
 export function FilterSheet() {
   const overlay = useOverlay('filtros');
   const { filters, setFilters } = useCatalogFilters();
+  const { theme } = useTheme();
+  const { products } = theme.catalog;
   const [draft, setDraft] = useState<CatalogFilters>(filters);
 
   // Start from the current filters every time the sheet opens.
@@ -21,7 +23,7 @@ export function FilterSheet() {
     if (overlay.isOpen) setDraft(filters);
   }, [overlay.isOpen]);
 
-  const count = useMemo(() => filterProducts(products, draft).length, [draft]);
+  const count = useMemo(() => filterProducts(products, draft).length, [products, draft]);
   const patch = (value: Partial<CatalogFilters>) => setDraft((current) => ({ ...current, ...value }));
 
   return (
@@ -44,7 +46,7 @@ export function FilterSheet() {
         <fieldset>
           <legend className="mb-3 text-[15px] font-bold">Categoria</legend>
           <div className="flex flex-wrap gap-2">
-            {railCategories.map((category) => (
+            {railCategories(theme).map((category) => (
               <ToggleChip
                 key={category.id}
                 label={category.name}

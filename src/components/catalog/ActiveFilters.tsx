@@ -1,7 +1,7 @@
-import { categoryName } from '../../data/categories';
 import { useCatalogFilters } from '../../hooks/useCatalogFilters';
 import { activeFilterCount, priceRangeLabel, sortLabel } from '../../lib/catalog';
 import { cn } from '../../lib/cn';
+import { categoryName } from '../../themes';
 import { RemovableChip } from '../ui/Chip';
 
 /** Active filters, each removable on its own, plus "clear all". */

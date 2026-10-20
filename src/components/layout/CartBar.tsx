@@ -21,7 +21,7 @@ export function CartBar() {
         <button
           type="button"
           onClick={() => bag.open()}
-          className="press flex h-14 w-full items-center gap-3 rounded-2xl bg-ink pr-3 pl-2 text-white shadow-[0_14px_28px_-12px_rgb(23_17_15/0.55)]"
+          className="press flex h-14 w-full items-center gap-3 rounded-2xl bg-ink pr-3 pl-2 text-white shadow-dock"
         >
           <span className="relative grid size-10 place-items-center rounded-xl bg-brand">
             <ShoppingBag className="size-5" strokeWidth={2} aria-hidden />

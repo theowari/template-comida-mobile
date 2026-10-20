@@ -1,12 +1,13 @@
 import { Plus, ShoppingBag, Store } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { getProduct } from '../../data/products';
 import { store } from '../../data/store';
 import { useCart } from '../../hooks/useCart';
 import { useCheckoutDraft } from '../../hooks/useCheckoutDraft';
 import { useOverlay } from '../../hooks/useOverlay';
+import { useTheme } from '../../hooks/useTheme';
 import { formatBRL, pluralize } from '../../lib/format';
+import { getProduct } from '../../themes';
 import type { CartItem } from '../../types';
 import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
@@ -25,6 +26,7 @@ export function CartDrawer() {
   const overlay = useOverlay('sacola');
   const cart = useCart();
   const { draft } = useCheckoutDraft();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const [removed, setRemoved] = useState<Removed | null>(null);
   const [confirmClear, setConfirmClear] = useState(false);
@@ -112,7 +114,7 @@ export function CartDrawer() {
           <div className="px-4 sm:px-5">
             <p className="flex items-center gap-2 pt-4 text-[13px] text-ink-2">
               <Store className="size-4" aria-hidden />
-              {store.name} · {draft.mode === 'retirada' ? `Retirada em ${store.pickup.estimate}` : `Entrega em ${store.delivery.estimate}`}
+              {theme.brand.name.join(' ')} · {draft.mode === 'retirada' ? `Retirada em ${store.pickup.estimate}` : `Entrega em ${store.delivery.estimate}`}
             </p>
 
             <ul className="divide-y divide-line">

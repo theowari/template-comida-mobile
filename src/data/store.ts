@@ -1,12 +1,11 @@
 import type { Cents, PaymentMethodId } from '../types';
 
 /**
- * Store configuration. Everything here is demonstrative until the store
- * validates it operationally; replace with values from the backend.
+ * Store configuration shared by every theme. Everything here is demonstrative
+ * until the store validates it operationally; replace with values from the
+ * backend. Brand copy (name, tagline, opening hours) lives in src/themes.
  */
 export const store = {
-  name: 'Seu negócio',
-  tagline: 'Sabor que chega até você.',
   greeting: 'Olá, seja bem-vindo!',
 
   /** When true, the UI labels prices, ratings, promotions and orders as demo. */
@@ -26,7 +25,6 @@ export const store = {
   /** Fulfillment modes offered by the store. */
   modes: { delivery: true, pickup: true },
 
-  openingHours: 'Todos os dias, das 18h às 23h30',
   phone: '(00) 0000-0000',
 
   /** CEP lookup for address autofill. 'viacep' calls viacep.com.br. */

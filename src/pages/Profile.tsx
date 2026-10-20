@@ -7,12 +7,14 @@ import { Button } from '../components/ui/Button';
 import { store } from '../data/store';
 import { useCheckoutDraft } from '../hooks/useCheckoutDraft';
 import { useFavorites } from '../hooks/useFavorites';
+import { useTheme } from '../hooks/useTheme';
 import { formatAddress } from '../lib/checkout';
 import { formatPhone } from '../lib/masks';
 
 export function Profile() {
   const { draft, hasSavedData, forgetSavedData } = useCheckoutDraft();
   const { ids } = useFavorites();
+  const { theme } = useTheme();
   const [confirming, setConfirming] = useState(false);
 
   const links = [
@@ -112,12 +114,12 @@ export function Profile() {
 
         <section aria-labelledby="loja-perfil-titulo" className="rounded-card bg-surface p-4 shadow-card sm:p-5">
           <h2 id="loja-perfil-titulo" className="text-[15px] font-bold">
-            {store.name}
+            {theme.brand.name.join(' ')}
           </h2>
           <dl className="mt-2 space-y-1.5 text-[14px]">
             <div className="flex gap-2">
               <dt className="text-ink-2">Horário:</dt>
-              <dd>{store.openingHours}</dd>
+              <dd>{theme.brand.openingHours}</dd>
             </div>
             <div className="flex gap-2">
               <dt className="text-ink-2">Retirada:</dt>

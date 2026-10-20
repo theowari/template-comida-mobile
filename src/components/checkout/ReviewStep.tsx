@@ -1,6 +1,5 @@
 import { Pencil } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { getProduct } from '../../data/products';
 import { store } from '../../data/store';
 import { useCart } from '../../hooks/useCart';
 import { useCheckoutDraft } from '../../hooks/useCheckoutDraft';
@@ -9,6 +8,7 @@ import { formatAddress, type StepId } from '../../lib/checkout';
 import { formatBRL } from '../../lib/format';
 import { formatPhone } from '../../lib/masks';
 import { describeSelections, lineTotal } from '../../lib/pricing';
+import { getProduct } from '../../themes';
 import { OrderSummary } from '../cart/OrderSummary';
 import { paymentLabel } from './PaymentStep';
 

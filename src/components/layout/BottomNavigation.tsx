@@ -7,7 +7,7 @@ export function BottomNavigation() {
   return (
     <nav aria-label="Navegação principal" className="fixed inset-x-0 bottom-0 z-40 lg:hidden">
       <div className="mx-auto max-w-[560px] px-3 pb-[max(8px,env(safe-area-inset-bottom))]">
-        <ul className="grid h-16 grid-cols-5 items-stretch rounded-[22px] bg-surface px-1 shadow-[0_10px_30px_-12px_rgb(74_44_26/0.35),0_1px_3px_rgb(74_44_26/0.08)]">
+        <ul className="grid h-16 grid-cols-5 items-stretch rounded-[22px] bg-surface px-1 shadow-nav">
           {primaryNav.map((item) => {
             const Icon = item.icon;
             return (

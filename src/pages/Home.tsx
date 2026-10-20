@@ -12,16 +12,12 @@ import { HeroBanner } from '../components/home/HeroBanner';
 import { HomeHeader } from '../components/layout/Header';
 import { Button, ButtonLink } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/EmptyState';
-import { categoryName } from '../data/categories';
-import { featuredProductIds, getProduct } from '../data/products';
-import { heroSlides, type HeroSlide } from '../data/promotions';
-import { store } from '../data/store';
 import { useCatalogFilters } from '../hooks/useCatalogFilters';
+import { useTheme } from '../hooks/useTheme';
 import { isRefining } from '../lib/catalog';
 import { pluralize } from '../lib/format';
-import type { Product } from '../types';
-
-const featured = featuredProductIds.map((id) => getProduct(id)).filter((product): product is Product => Boolean(product?.available));
+import { categoryName, featuredProducts } from '../themes';
+import type { HeroSlide } from '../themes/types';
 
 function scrollToProducts() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -32,8 +28,10 @@ function scrollToProducts() {
 
 export function Home() {
   const { filters, results, setFilters, resetFilters } = useCatalogFilters();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const refining = isRefining(filters);
+  const featured = featuredProducts(theme);
 
   const onHeroAction = (slide: HeroSlide) => {
     if (slide.target.kind === 'route') {
@@ -46,7 +44,9 @@ export function Home() {
 
   return (
     <>
-      <h1 className="sr-only">{store.name}: pizzas, lanches e bebidas com entrega ou retirada</h1>
+      <h1 className="sr-only">
+        {theme.brand.name.join(' ')}: {theme.brand.homeHeading}
+      </h1>
       <HomeHeader />
 
       <div className="sticky top-0 z-30 bg-ground px-4 pt-2 pb-2 lg:hidden">
@@ -59,7 +59,7 @@ export function Home() {
           <ActiveFilters />
         </div>
 
-        {!refining ? <HeroBanner slides={heroSlides} onAction={onHeroAction} /> : null}
+        {!refining ? <HeroBanner slides={theme.heroSlides} onAction={onHeroAction} /> : null}
 
         <CategoryList />
 
@@ -94,14 +94,14 @@ export function Home() {
                   Que tal explorar outras opções? Confira os mais pedidos abaixo.
                 </EmptyState>
                 <ProductSection title="Mais pedidos" titleId="sugestoes-titulo" className="mt-2">
-                  <ProductGrid products={featured} columns={3} />
+                  <ProductGrid products={featured} columns={3} slotKeys />
                 </ProductSection>
               </>
             )}
           </ProductSection>
         ) : filters.category === 'todas' ? (
           <ProductSection id="produtos" title="Mais pedidos" link={{ to: '/cardapio', label: 'Ver todos' }}>
-            <ProductGrid products={featured} columns={3} priorityCount={2} />
+            <ProductGrid products={featured} columns={3} priorityCount={2} slotKeys />
           </ProductSection>
         ) : (
           <ProductSection

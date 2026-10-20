@@ -70,7 +70,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             key={toast.id}
             data-leaving={toast.leaving}
             role={toast.tone === 'error' ? 'alert' : undefined}
-            className="toast pointer-events-auto flex w-full max-w-md items-center gap-3 rounded-2xl bg-ink py-3 pr-2 pl-4 text-sm text-white shadow-[0_16px_32px_-12px_rgb(23_17_15/0.5)]"
+            className="toast pointer-events-auto flex w-full max-w-md items-center gap-3 rounded-2xl bg-ink py-3 pr-2 pl-4 text-sm text-white shadow-toast"
           >
             {toast.tone === 'error' ? (
               <CircleAlert className="size-5 shrink-0 text-brand-100" aria-hidden />

@@ -1,4 +1,4 @@
-import { categoryName } from '../data/categories';
+import { categoryName } from '../themes';
 import type { CatalogFilters, PriceRange, Product, SortOption } from '../types';
 import { normalizeText } from './format';
 import { startingPrice } from './pricing';

@@ -1,3 +1,5 @@
+import type { ThemeId } from '../themes/types';
+
 /** Prices are always integers in centavos (R$ 42,90 = 4290). */
 export type Cents = number;
 
@@ -7,15 +9,14 @@ export interface ResponsiveImage {
   alt: string;
 }
 
-export type CategoryId =
-  | 'pizzas'
-  | 'paes-de-alho'
-  | 'acompanhamentos'
-  | 'bebidas'
-  | 'sobremesas'
-  | 'combos';
+/**
+ * Each theme defines its own categories. 'combos' is shared by every theme
+ * (Ofertas lists it); an id used by two themes must keep the same name.
+ */
+export type CategoryId = string;
 
-export type CategoryFilter = CategoryId | 'todas';
+/** A category id, or 'todas' for the whole catalog. */
+export type CategoryFilter = CategoryId;
 
 export interface Category {
   id: CategoryFilter;
@@ -162,6 +163,8 @@ export type OrderStatus = 'recebido' | 'em-preparo' | 'a-caminho' | 'pronto-para
 export interface Order {
   id: string;
   createdAt: string;
+  /** Theme (brand) the order was placed in. Orders saved before themes existed are Pizzaria. */
+  theme?: ThemeId;
   /** 'demo' orders were never sent to a store. */
   source: 'demo' | 'api';
   status: OrderStatus | null;

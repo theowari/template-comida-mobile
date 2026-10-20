@@ -10,6 +10,7 @@ import { CART_BAR_SPACE, CartBar } from './CartBar';
 import { DesktopHeader } from './Header';
 import { NavDrawer } from './NavDrawer';
 import { NotificationsSheet } from './NotificationsSheet';
+import { ThemeBar } from './ThemeBar';
 
 /** Root: overlays available on every page (sheets are driven by the URL). */
 export function RootLayout() {
@@ -46,6 +47,7 @@ export function StoreLayout() {
       >
         Pular para o conteúdo
       </a>
+      <ThemeBar />
       <DesktopHeader />
       <main
         id="conteudo"

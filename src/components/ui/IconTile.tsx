@@ -16,7 +16,7 @@ export function IconTile({ icon: Icon, label, badge, className, ...rest }: IconT
       type="button"
       aria-label={label}
       className={cn(
-        'press relative grid size-11 shrink-0 place-items-center rounded-tile bg-surface text-ink shadow-tile transition-[box-shadow,background-color] duration-150 hover:bg-[#fffdfb] hover:shadow-[0_10px_22px_-10px_rgb(74_44_26/0.3),0_1px_2px_rgb(74_44_26/0.06)]',
+        'press relative grid size-11 shrink-0 place-items-center rounded-tile bg-surface text-ink shadow-tile transition-[box-shadow,background-color] duration-150 hover:bg-surface-hover hover:shadow-tile-hover',
         className,
       )}
       {...rest}

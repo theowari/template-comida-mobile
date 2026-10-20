@@ -11,22 +11,30 @@ interface ProductGridProps {
   /** Phones: cards in two columns or full-width rows. */
   mobileLayout?: 'card' | 'row';
   priorityCount?: number;
+  /**
+   * Key cards by position instead of product. For lists a theme defines (featured,
+   * menu sections, combos): on a theme change each card stays and its photo crossfades.
+   * Search and filter results keep product keys.
+   */
+  slotKeys?: boolean;
 }
 
-export function ProductGrid({ products, columns = 4, mobileLayout = 'card', priorityCount = 0 }: ProductGridProps) {
+export function ProductGrid({ products, columns = 4, mobileLayout = 'card', priorityCount = 0, slotKeys = false }: ProductGridProps) {
+  const keyOf = (product: Product, index: number) => (slotKeys ? index : product.id);
+
   if (mobileLayout === 'row') {
     return (
       <>
         <ul className="grid gap-3 sm:hidden">
           {products.map((product, index) => (
-            <li key={product.id}>
+            <li key={keyOf(product, index)}>
               <ProductCard product={product} layout="row" priority={index < priorityCount} />
             </li>
           ))}
         </ul>
         <ul className={cn('hidden gap-4 sm:grid sm:grid-cols-3', columns === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3')}>
           {products.map((product, index) => (
-            <li key={product.id} className="flex">
+            <li key={keyOf(product, index)} className="flex">
               <ProductCard product={product} priority={index < priorityCount} />
             </li>
           ))}
@@ -38,7 +46,7 @@ export function ProductGrid({ products, columns = 4, mobileLayout = 'card', prio
   return (
     <ul className={cn('grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4', columns === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3 lg:gap-5')}>
       {products.map((product, index) => (
-        <li key={product.id} className="flex [&>article]:w-full">
+        <li key={keyOf(product, index)} className="flex [&>article]:w-full">
           <ProductCard product={product} priority={index < priorityCount} />
         </li>
       ))}
@@ -62,7 +70,7 @@ export function ProductSection({ id, title, titleId, link, aside, children, clas
     <section id={id} aria-labelledby={headingId} className={cn('scroll-mt-24 lg:scroll-mt-28', className)}>
       <div className="mb-3 flex items-end justify-between gap-3 lg:mb-4">
         <div className="min-w-0">
-          <h2 id={headingId} className="text-xl leading-tight font-bold tracking-[-0.015em] lg:text-2xl">
+          <h2 id={headingId} className="font-heading text-xl leading-tight font-bold tracking-[-0.015em] lg:text-2xl">
             {title}
           </h2>
           {aside}

@@ -1,7 +1,8 @@
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import type { HeroSlide } from '../../data/promotions';
 import { cn } from '../../lib/cn';
+import { imageSizes } from '../../lib/imageSizes';
+import type { HeroSlide } from '../../themes/types';
 import { FoodImage } from '../ui/FoodImage';
 
 interface HeroBannerProps {
@@ -43,7 +44,8 @@ export function HeroBanner({ slides, onAction }: HeroBannerProps) {
       <div ref={trackRef} className="snap-track no-scrollbar flex overflow-x-auto rounded-[22px] bg-oven">
         {slides.map((slide, index) => (
           <div
-            key={slide.id}
+            // Keyed by position: on a theme change the carousel keeps its place and the photos crossfade.
+            key={index}
             role="group"
             aria-roledescription="slide"
             aria-label={`${index + 1} de ${slides.length}`}
@@ -53,22 +55,22 @@ export function HeroBanner({ slides, onAction }: HeroBannerProps) {
             <FoodImage
               image={slide.image}
               priority={index === 0}
-              sizes="(min-width: 1024px) 760px, 70vw"
-              className="absolute inset-y-0 right-0 -z-10 h-full w-[64%] object-cover sm:w-[60%]"
+              sizes={imageSizes.hero}
+              className="absolute inset-y-0 right-0 -z-10 h-full w-[64%] object-cover [mask-image:var(--hero-photo-mask)] sm:w-[60%]"
               style={{ objectPosition: slide.focus }}
             />
             {/* Legibility: the dark field owns the copy column and fades into the photo. */}
             <div
               aria-hidden
-              className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,var(--color-oven)_36%,rgb(23_17_15/0.82)_50%,rgb(23_17_15/0)_78%)]"
+              className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,var(--color-oven)_36%,color-mix(in_srgb,var(--color-oven)_82%,transparent)_50%,transparent_78%)]"
             />
             <div className="flex w-[64%] max-w-[520px] flex-col justify-center py-5 pr-2 pl-4 sm:pl-7 lg:w-1/2 lg:py-10 lg:pl-12">
               <span className="self-start rounded-full bg-brand px-2 py-1 text-[10px] leading-none font-bold tracking-[0.04em] whitespace-nowrap text-white uppercase min-[400px]:px-2.5 min-[400px]:tracking-[0.07em] lg:text-[12px]">
                 {slide.badge}
               </span>
-              <h2 className="mt-2.5 font-display text-[29px] leading-[0.92] font-extrabold tracking-[-0.005em] uppercase sm:text-[38px] lg:mt-4 lg:text-[64px]">
+              <h2 className="type-display mt-2.5 [--display-size:29px] sm:[--display-size:38px] lg:mt-4 lg:[--display-size:64px]">
                 <span className="block text-white">{slide.titleLines[0]}</span>
-                <span className="block text-brand-bright">{slide.titleLines[1]}</span>
+                <span className="type-display-accent block text-brand-bright">{slide.titleLines[1]}</span>
               </h2>
               <p className="mt-2 max-w-[30ch] text-[13px] leading-snug text-white/80 lg:mt-4 lg:text-[17px]">{slide.description}</p>
               <button

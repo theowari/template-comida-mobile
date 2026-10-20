@@ -108,7 +108,7 @@ export function SheetHeader({ titleId, title, subtitle, onClose, actions, classN
   return (
     <div className={cn('flex shrink-0 items-center gap-2 border-b border-line px-4 py-3 sm:px-5', className)}>
       <div className="min-w-0 flex-1">
-        <h2 id={titleId} className="truncate text-lg font-bold tracking-[-0.01em]">
+        <h2 id={titleId} className="truncate font-heading text-lg font-bold tracking-[-0.01em]">
           {title}
         </h2>
         {subtitle ? <p className="truncate text-[13px] text-ink-2">{subtitle}</p> : null}

@@ -12,7 +12,7 @@ React + Vite + TypeScript + Tailwind CSS, Lucide React for icons, React Router f
 
 ## Users
 
-Brazilian customers ordering food for delivery or pickup from a single pizzeria, mostly on a phone, often hungry and in a hurry. Most already know the iFood ordering flow (Opinion Box 2023, cited by iFood in 07/2025: 96% know the app, 94% use it), but the store must also work for someone who never used a delivery app.
+Brazilian customers ordering food for delivery or pickup from a single local store, mostly on a phone, often hungry and in a hurry. The site doubles as a sales demo: a local business owner switches it between segments (pizzaria, confeitaria, cafeteria, açaíteria) to see the same template become their brand. Most already know the iFood ordering flow (Opinion Box 2023, cited by iFood in 07/2025: 96% know the app, 94% use it), but the store must also work for someone who never used a delivery app.
 
 ## Product Purpose
 
@@ -33,12 +33,13 @@ A single store's own channel that keeps the ordering conventions customers alrea
 
 - No backend yet. Orders, payments and order status are demonstrative and must be labeled as such. No real charge, no real tracking.
 - Payment is prepared for a provider integration (Pix, card on delivery, cash) but never simulates a real transaction.
-- All catalog, promotion and store data lives in `src/data/` so it can be replaced by an API.
+- Catalog, categories, banners and brand copy live per theme in `src/themes/<id>/`; shared store data and coupons in `src/data/`. Both can be replaced by an API.
 - Brazilian Portuguese everywhere; BRL currency format.
 
 ## Brand Commitments
 
-- Name is always "Seu negócio". Tagline "Sabor que chega até você."
+- The default theme, Pizzaria, is "Seu negócio", tagline "Sabor que chega até você.", and is preserved exactly. Every visit starts on it.
+- Demonstration themes use fictional names: Confeitaria "Ateliê Doce", Cafeteria "Grão & Prosa", Açaíteria "Roxo Açaí". They share the template's structure and behavior; only tokens, type, photos and brand copy change (see DESIGN.md, Themes).
 - Original typographic logo with a small food symbol. No Pizza Hut or iFood names, logos or packaging.
 - Palette pinned by the brief: red #D71935, dark red #B8102B, ground #F7F3EF, cards #FFFFFF, text #202020, secondary text #777777 (may be adjusted for contrast), borders #EAE5E0.
 - Inter (or similar) for UI text.

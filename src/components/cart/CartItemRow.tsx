@@ -1,8 +1,9 @@
 import { Pencil } from 'lucide-react';
-import { getProduct } from '../../data/products';
 import { useOverlay } from '../../hooks/useOverlay';
 import { formatBRL } from '../../lib/format';
+import { imageSizes } from '../../lib/imageSizes';
 import { describeSelections, hasOptions, lineTotal } from '../../lib/pricing';
+import { getProduct } from '../../themes';
 import type { CartItem } from '../../types';
 import { FoodImage } from '../ui/FoodImage';
 import { QuantityStepper } from '../ui/QuantityStepper';
@@ -21,7 +22,7 @@ export function CartItemRow({ item, onQuantity, onRemove }: CartItemRowProps) {
 
   return (
     <div className="flex gap-3 py-4">
-      <FoodImage image={{ ...product.image, alt: '' }} sizes="64px" className="size-16 shrink-0 rounded-xl bg-ground-2 object-cover" />
+      <FoodImage image={{ ...product.image, alt: '' }} sizes={imageSizes.bagLine} className="size-16 shrink-0 rounded-xl bg-ground-2 object-cover" />
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-[15px] leading-snug font-semibold">{product.name}</h3>

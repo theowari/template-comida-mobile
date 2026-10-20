@@ -3,10 +3,11 @@ import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { createMemoryRouter, RouterProvider, useLocation } from 'react-router';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { getProduct } from '../../data/products';
+import { getProduct } from '../../themes';
 import { CartProvider, useCart } from '../../hooks/useCart';
 import { CheckoutDraftProvider } from '../../hooks/useCheckoutDraft';
 import { FavoritesProvider } from '../../hooks/useFavorites';
+import { ThemeProvider } from '../../hooks/useTheme';
 import { ToastProvider } from '../../hooks/useToast';
 import type { Product } from '../../types';
 import { ProductCard } from './ProductCard';
@@ -23,13 +24,15 @@ function Probe() {
 
 function renderCard(product: Product) {
   const Providers = ({ children }: { children: ReactNode }) => (
-    <CheckoutDraftProvider>
-      <CartProvider>
-        <FavoritesProvider>
-          <ToastProvider>{children}</ToastProvider>
-        </FavoritesProvider>
-      </CartProvider>
-    </CheckoutDraftProvider>
+    <ThemeProvider>
+      <CheckoutDraftProvider>
+        <CartProvider>
+          <FavoritesProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </FavoritesProvider>
+        </CartProvider>
+      </CheckoutDraftProvider>
+    </ThemeProvider>
   );
   const router = createMemoryRouter([
     {

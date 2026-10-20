@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { getProduct } from '../data/products';
 import { store } from '../data/store';
+import { getProduct } from '../themes';
 import type { CartItem, Product } from '../types';
 import {
   computeTotals,

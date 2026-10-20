@@ -2,6 +2,7 @@ import { Bike, Check, Clock, LoaderCircle, MapPin, Store } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { store } from '../../data/store';
 import { useCheckoutDraft } from '../../hooks/useCheckoutDraft';
+import { useTheme } from '../../hooks/useTheme';
 import { brazilianStates, CepNotFoundError, lookupCep } from '../../lib/cep';
 import { validateAddress } from '../../lib/checkout';
 import { cn } from '../../lib/cn';
@@ -83,13 +84,14 @@ export function DeliveryStep({ showErrors }: { showErrors: boolean }) {
 }
 
 function PickupInfo() {
+  const { theme } = useTheme();
   return (
     <div className="rounded-2xl bg-surface p-4 shadow-card">
       <p className="flex items-start gap-2.5 text-[15px]">
         <MapPin className="mt-0.5 size-5 shrink-0 text-brand" aria-hidden />
         <span>
           <span className="block font-semibold">Retire em {store.pickup.address}</span>
-          <span className="block text-[14px] text-ink-2">{store.openingHours}</span>
+          <span className="block text-[14px] text-ink-2">{theme.brand.openingHours}</span>
         </span>
       </p>
       <p className="mt-3 flex items-center gap-2.5 text-[14px] text-ink-2">

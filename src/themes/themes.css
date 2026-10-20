@@ -1,0 +1,188 @@
+/* ------------------------------------------------------------------
+   Themes: one template, four brands.
+   Pizzaria is the default: its colors are the @theme values in
+   src/index.css and its type tokens are the :root block below. Every
+   other theme overrides the same tokens under [data-theme='<id>'] on
+   <html>; components only ever read tokens.
+   ------------------------------------------------------------------ */
+
+/* Registered so they can transition when the brand changes. */
+@property --color-brand { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-brand-dark { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-brand-bright { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-brand-50 { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-brand-100 { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-ground { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-ground-2 { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-ground-sticky { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-surface { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-surface-hover { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-ink { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-ink-2 { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-line { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-line-strong { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-oven { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-blush { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color-blush-ink { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --shade { syntax: '<color>'; inherits: true; initial-value: transparent; }
+
+/* Pizzaria type and shadow tint (its colors live in @theme). */
+:root {
+  --shade: rgb(74 44 26);
+
+  --display-weight: 800;
+  --display-style: normal;
+  --display-accent-style: normal;
+  --display-case: uppercase;
+  --display-tracking: -0.005em;
+  --display-leading: 0.92;
+  --display-scale: 1;
+
+  --wordmark-weight: 800;
+  --wordmark-style: italic;
+  --wordmark-tracking: -0.01em;
+  --wordmark-scale: 1;
+
+  /* The hero photo's left edge: Pizzaria's photos are dark there; lighter photos fade into the field. */
+  --hero-photo-mask: none;
+}
+
+[data-theme='confeitaria'],
+[data-theme='cafeteria'],
+[data-theme='acaiteria'] {
+  --hero-photo-mask: linear-gradient(90deg, transparent, #000 26%);
+}
+
+/* Confeitaria "Ateliê Doce": blush and cream, raspberry-rose action, wine-chocolate banner. */
+[data-theme='confeitaria'] {
+  --color-brand: #ad3f6c;
+  --color-brand-dark: #8c2c55;
+  --color-brand-bright: #f6a8c4;
+  --color-brand-50: #fcf0f4;
+  --color-brand-100: #f8dbe6;
+  --color-ground: #fcf5f2;
+  --color-ground-2: #f5e7e4;
+  --color-ground-sticky: #faf1ee;
+  --color-surface: #ffffff;
+  --color-surface-hover: #fffafb;
+  --color-ink: #3a1d26;
+  --color-ink-2: #78535e;
+  --color-line: #f1e1df;
+  --color-line-strong: #e4cbc9;
+  --color-oven: #3f1a28;
+  --color-blush: #f8dfe6;
+  --color-blush-ink: #6a3f4e;
+  --shade: rgb(112 44 70);
+
+  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Bodoni Moda Variable', Georgia, serif;
+  --font-display: 'Bodoni Moda Variable', Georgia, serif;
+  --display-weight: 600;
+  --display-accent-style: italic;
+  --display-case: none;
+  --display-tracking: -0.01em;
+  --display-leading: 1;
+  --display-scale: 1;
+  --wordmark-weight: 600;
+  --wordmark-style: italic;
+  --wordmark-tracking: -0.01em;
+  --wordmark-scale: 0.95;
+}
+
+/* Cafeteria "Grão & Prosa": sand and cream, copper action, dark-roast banner. */
+[data-theme='cafeteria'] {
+  --color-brand: #9a5222;
+  --color-brand-dark: #7b3f17;
+  --color-brand-bright: #e6ad74;
+  --color-brand-50: #f8efe5;
+  --color-brand-100: #efdcc6;
+  --color-ground: #f3ece3;
+  --color-ground-2: #e9dfd2;
+  --color-ground-sticky: #f1e9df;
+  --color-surface: #fffcf8;
+  --color-surface-hover: #fff8f0;
+  --color-ink: #2a1c15;
+  --color-ink-2: #685649;
+  --color-line: #e6dbcd;
+  --color-line-strong: #d5c4b0;
+  --color-oven: #2b1b12;
+  --color-blush: #ead8c2;
+  --color-blush-ink: #5a4333;
+  --shade: rgb(70 42 22);
+
+  --font-sans: 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Besley Variable', Georgia, serif;
+  --font-display: 'Besley Variable', Georgia, serif;
+  --display-weight: 800;
+  --display-case: none;
+  --display-tracking: -0.015em;
+  --display-leading: 1;
+  --display-scale: 0.9;
+  --wordmark-weight: 800;
+  --wordmark-style: normal;
+  --wordmark-tracking: -0.02em;
+  --wordmark-scale: 0.86;
+}
+
+/* Açaíteria "Roxo Açaí": lavender ground, violet action, açaí-pulp banner with a lime highlight. */
+[data-theme='acaiteria'] {
+  --color-brand: #6b2bb5;
+  --color-brand-dark: #541c94;
+  --color-brand-bright: #cdf26e;
+  --color-brand-50: #f4eefc;
+  --color-brand-100: #e6daf8;
+  --color-ground: #f6f2fb;
+  --color-ground-2: #ece5f5;
+  --color-ground-sticky: #f3eff9;
+  --color-surface: #ffffff;
+  --color-surface-hover: #fdfbff;
+  --color-ink: #22132e;
+  --color-ink-2: #655679;
+  --color-line: #e7e0f0;
+  --color-line-strong: #d4c8e3;
+  --color-oven: #26093a;
+  --color-blush: #e9ddf9;
+  --color-blush-ink: #4f3a69;
+  --shade: rgb(60 24 96);
+
+  --font-sans: 'Onest Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --display-weight: 800;
+  --display-case: none;
+  --display-tracking: -0.03em;
+  --display-leading: 0.95;
+  --display-scale: 0.95;
+  --wordmark-weight: 800;
+  --wordmark-style: normal;
+  --wordmark-tracking: -0.035em;
+  --wordmark-scale: 0.95;
+}
+
+/* ------------------------------------------------------------------
+   The brand morph. Only while data-theme-shift is on: the registered
+   tokens transition together on <html> and every surface follows,
+   gradients and shadows included. Element-level color transitions are
+   paused so nothing lags behind; opacity and transform keep running
+   (photo crossfades, press feedback, sheets).
+   ------------------------------------------------------------------ */
+html[data-theme-shift] {
+  transition-property:
+    --color-brand, --color-brand-dark, --color-brand-bright, --color-brand-50, --color-brand-100, --color-ground,
+    --color-ground-2, --color-ground-sticky, --color-surface, --color-surface-hover, --color-ink, --color-ink-2,
+    --color-line, --color-line-strong, --color-oven, --color-blush, --color-blush-ink, --shade;
+  transition-duration: 480ms;
+  transition-timing-function: ease;
+}
+
+html[data-theme-shift] *,
+html[data-theme-shift] *::before,
+html[data-theme-shift] *::after {
+  transition-property: opacity, transform !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme-shift] {
+    transition-duration: 200ms;
+  }
+}

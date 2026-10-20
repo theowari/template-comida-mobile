@@ -9,13 +9,16 @@ colors:
   red-wash-strong: "#FADCE1"
   flour-ground: "#F7F3EF"
   flour-ground-deep: "#EFE9E3"
+  flour-ground-sticky: "#F6F1EC"
   plate-white: "#FFFFFF"
+  plate-white-hover: "#FFFDFB"
   ink: "#202020"
   ink-muted: "#6E6862"
   crumb-line: "#EAE5E0"
   crumb-line-strong: "#D9D1C9"
   oven-black: "#17110F"
   promo-blush: "#FBE7E4"
+  promo-blush-ink: "#5D4B47"
   basil-green: "#1E7F4F"
   basil-wash: "#E8F5EE"
   amber-warning: "#8F5400"
@@ -267,12 +270,13 @@ A restrained warm palette: one saturated red over flour-white neutrals, with a s
 ### Neutral
 - **Flour Ground** (#F7F3EF): page background and sticky bars.
 - **Flour Ground Deep** (#EFE9E3): second neutral layer: image placeholders, inline notices, hover of list rows.
-- **Plate White** (#FFFFFF): cards, tiles, sheets, fields.
+- **Flour Ground Sticky** (#F6F1EC): sticky option-group headers in the product sheet.
+- **Plate White** (#FFFFFF): cards, tiles, sheets, fields. **Plate White Hover** (#FFFDFB): hover of header tiles.
 - **Ink** (#202020): body text and headings; also the floating bag bar and the "Obrigatório" pill.
 - **Ink Muted** (#6E6862): secondary text, placeholders, inactive nav labels. Darkened from the brief's #777777 so it holds 5.0:1 on the ground.
 - **Crumb Line** (#EAE5E0) and **Crumb Line Strong** (#D9D1C9): dividers, field and chip outlines.
 - **Oven Black** (#17110F): the promotional hero banner only.
-- **Promo Blush** (#FBE7E4): the combo banner field.
+- **Promo Blush** (#FBE7E4): the combo banner field, with **Promo Blush Ink** (#5D4B47) for its secondary copy.
 
 ### Status
 - **Basil Green** (#1E7F4F) on **Basil Wash** (#E8F5EE): applied coupon, satisfied required group ("Ok"), discount lines, order success.
@@ -295,7 +299,7 @@ A restrained warm palette: one saturated red over flour-white neutrals, with a s
 - **Display** (800, 29px phone / 38px tablet / 64px desktop, line-height 0.92, uppercase): promotional banner headlines, two lines (white, then red).
 - **Promo title** (800, 30 / 36 / 52px, uppercase): the combo banner title. **Sticker** (800, 26px number and 14px "OFF"; 40px and 20px on desktop).
 - **Wordmark** (800 italic, 27px; 32px large): "Seu negócio" next to the slice mark; "negócio" in red.
-- **Headlines** (Inter 700, tracking -0.015 to -0.02em): section titles 20px phone / 24px desktop; page titles and the product sheet name 22px phone / 32px desktop; checkout step titles 22px / 26px.
+- **Headlines** (Inter 700, tracking -0.015 to -0.02em; the `font-heading` token, Inter in this theme): section titles 20px phone / 24px desktop; page titles and the product sheet name 22px phone / 32px desktop; checkout step titles 22px / 26px; sheet and empty-state titles 18px.
 - **Total** (Inter 700, 18px, tabular): the total next to a bottom-pinned action.
 - **Price** (Inter 700, 17px, tabular figures): every price; always Brazilian format "R$ 42,90". A "a partir de" qualifier (11px caption) sits above when a required option changes the price.
 - **Body large** (Inter 600, 16px): titles inside selectable cards (delivery mode, payment method).
@@ -370,6 +374,46 @@ Ink-black bar, 56px, 16px radius, rising 24px into place when the bag first gets
 
 ### Sheets
 Native dialogs. Phones: bottom sheet with 24px top radius, sticky footer for the primary action. Desktop: centered dialog (product, filters) or a right drawer (bag). Open with a 400ms iOS-like drawer curve; reduced motion keeps only a 200ms fade. Required option groups have sticky headers with an "Obrigatório" pill that turns into a green "Ok".
+
+## Themes
+
+One template, four brands. Everything above describes **Pizzaria**, the default theme ("Seu negócio"). Three demonstration themes reuse the exact same pages, components, layout and behavior and change only tokens, type, photography and brand copy. A visitor switches between them from the demo strip at the top of every page.
+
+### How a theme is built
+- **Tokens** live on `<html data-theme="<id>">`. Pizzaria's values are the `@theme` block in `src/index.css`; each other theme overrides the same names in `src/themes/themes.css`. Components read tokens only; no component knows which theme is on.
+- **Color tokens:** brand, brand-dark, brand-bright, brand-50, brand-100, ground, ground-2, ground-sticky, surface, surface-hover, ink, ink-2, line, line-strong, oven, blush, blush-ink, plus `--shade` (the warm neutral every soft shadow is tinted with). Brand shadows mix from brand-dark, scrims and dock shadows from oven, so depth changes color with the brand.
+- **Type tokens:** `--font-sans` (everything operable), `--font-heading` (headlines tier: section, page, sheet, step and empty-state titles), `--font-display` with `--display-weight / -style / -accent-style / -case / -tracking / -leading / -scale` (banner headlines, promo title, sticker) and `--wordmark-weight / -style / -tracking / -scale`.
+- **Content** (name, tagline, catalog, categories, hero slides, combo banner, photos, opening hours, placeholders) lives in `src/themes/<id>/`. Each theme fills the same slots: three hero slides, five rail categories plus hidden Combos, two combos, six featured products.
+
+### The three demonstration themes
+
+| | Confeitaria "Ateliê Doce" | Cafeteria "Grão & Prosa" | Açaíteria "Roxo Açaí" |
+|---|---|---|---|
+| Action (brand) | Raspberry rose #AD3F6C | Copper #9A5222 | Violet #6B2BB5 |
+| Brand dark | #8C2C55 | #7B3F17 | #541C94 |
+| Accent on banner | Blush pink #F6A8C4 | Caramel #E6AD74 | Lime #CDF26E |
+| Ground / ground-2 | #FCF5F2 / #F5E7E4 | #F3ECE3 / #E9DFD2 | #F6F2FB / #ECE5F5 |
+| Surface | #FFFFFF | Cream #FFFCF8 | #FFFFFF |
+| Ink / ink-2 | Wine-brown #3A1D26 / #78535E | Espresso #2A1C15 / #685649 | Plum #22132E / #655679 |
+| Banner field (oven) | Wine chocolate #3F1A28 | Dark roast #2B1B12 | Açaí pulp #26093A |
+| Promo field (blush) | #F8DFE6 | Latte #EAD8C2 | Lilac #E9DDF9 |
+| Display / headings | Bodoni Moda 600, sentence case, italic accent line | Besley 800 (a Clarendon), sentence case | Bricolage Grotesque 800, tracking -0.03em |
+| UI text | Figtree | Hanken Grotesk | Onest |
+| Logo mark | Cupcake | Coffee bean | Açaí bowl |
+
+Every pair the components use was checked for WCAG AA: white on brand 5.7 to 8.0:1, brand-dark text on every light ground 5.9:1 or more, ink-2 on ground-2 5.3:1 or more, accent on the banner field 8.1:1 or more. The brand pill on the dark banner sits at 2.2 to 2.8:1 against the field; its white label and white arrow chip carry it.
+
+### Named Rules
+**The Same Template Rule.** A theme never changes structure, spacing, component anatomy or behavior. If a theme needs a different layout, it is a different product, not a theme.
+
+**The Act Color Rule, per theme.** Each theme's brand color plays pizzeria red's role exactly: action, selection, badges. Status colors (basil, amber, star) are shared by every theme.
+
+**The Morph Rule.** Switching brands is one coordinated change: the registered color tokens transition together on `<html>` (480ms, ease), every photo crossfades from the old brand to the new (420ms, ease-out, only after the new file is decoded, so a frame is never empty), and copy and type change in the same frame. Nothing moves: layout and transforms are never animated. Reduced motion keeps the fade at 200ms. The next theme's fonts load before the switch (450ms at most), so text never flashes a fallback face.
+
+**The Fit Rule.** A wordmark keeps its designed size; only a name wider than its slot (Grão & Prosa in the phone header) is scaled down to fit. Pizzaria's never is.
+
+### Demo strip and theme select
+Ink field, 48px on phones and 44px on desktop, above the store header and the checkout bar: a palette icon, "Ver este site como" (plus a one-line explanation on wider screens) and a pill select. The select is a WAI-ARIA select-only combobox: each option shows three palette chips (ground, banner, brand), the segment and its brand name, and a check on the current one. The list grows from its trigger in 180ms. A `?tema=<id>` link opens the site on that theme; every plain visit starts on Pizzaria. Bag, favorites and order history belong to the theme they were made in.
 
 ## Do's and Don'ts
 

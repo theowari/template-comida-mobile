@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useCatalogFilters } from '../../hooks/useCatalogFilters';
 import { useOverlay } from '../../hooks/useOverlay';
+import { useTheme } from '../../hooks/useTheme';
 import { activeFilterCount } from '../../lib/catalog';
 import { cn } from '../../lib/cn';
 import { CountBadge } from '../ui/IconTile';
@@ -17,6 +18,7 @@ const searchPages = ['/', '/cardapio'];
 
 export function SearchBar({ className, compact = false }: SearchBarProps) {
   const { filters, setFilters } = useCatalogFilters();
+  const { theme } = useTheme();
   const filterSheet = useOverlay('filtros');
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,7 +44,7 @@ export function SearchBar({ className, compact = false }: SearchBarProps) {
           enterKeyHint="search"
           autoComplete="off"
           aria-label="Buscar no cardápio"
-          placeholder={compact ? 'Buscar no cardápio...' : 'Busque sua pizza favorita...'}
+          placeholder={compact ? 'Buscar no cardápio...' : theme.brand.searchPlaceholder}
           value={filters.query}
           onChange={(event) => {
             setFilters({ query: event.target.value });
@@ -55,7 +57,7 @@ export function SearchBar({ className, compact = false }: SearchBarProps) {
             }
           }}
           className={cn(
-            'w-full rounded-full border border-transparent bg-surface pl-12 text-ink shadow-tile transition-[border-color,box-shadow] duration-150 outline-none placeholder:text-ink-2 hover:border-line-strong focus:border-ink focus:shadow-[0_0_0_3px_rgb(32_32_32/0.1)] focus-visible:outline-none [&::-webkit-search-cancel-button]:hidden',
+            'w-full rounded-full border border-transparent bg-surface pl-12 text-ink shadow-tile transition-[border-color,box-shadow] duration-150 outline-none placeholder:text-ink-2 hover:border-line-strong focus:border-ink focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-ink)_10%,transparent)] focus-visible:outline-none [&::-webkit-search-cancel-button]:hidden',
             compact ? 'h-11' : 'h-12',
             filters.query ? 'pr-12' : 'pr-4',
           )}
@@ -79,7 +81,7 @@ export function SearchBar({ className, compact = false }: SearchBarProps) {
         onClick={() => filterSheet.open()}
         aria-label={count ? `Filtros, ${count} ativos` : 'Filtros'}
         className={cn(
-          'press relative grid shrink-0 place-items-center rounded-full bg-surface text-ink shadow-tile transition-shadow hover:shadow-[0_10px_22px_-10px_rgb(74_44_26/0.3)]',
+          'press relative grid shrink-0 place-items-center rounded-full bg-surface text-ink shadow-tile transition-shadow hover:shadow-lift',
           compact ? 'size-11' : 'size-12',
         )}
       >

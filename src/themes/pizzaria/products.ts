@@ -1,4 +1,4 @@
-import type { OptionGroup, Product } from '../types';
+import type { OptionGroup, Product } from '../../types';
 import { image } from './images';
 
 /*
@@ -401,12 +401,6 @@ export const products: Product[] = [
     tags: ['doce', 'chocolate', 'sorvete', 'sobremesa'],
   },
 ];
-
-const byId = new Map(products.map((product) => [product.id, product]));
-
-export function getProduct(id: string | null | undefined): Product | undefined {
-  return id ? byId.get(id) : undefined;
-}
 
 /** "Mais pedidos": order follows the brief. */
 export const featuredProductIds = [

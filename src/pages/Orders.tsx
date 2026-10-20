@@ -5,25 +5,29 @@ import { PageHeader } from '../components/layout/Header';
 import { ButtonLink } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/EmptyState';
 import { Notice } from '../components/ui/Notice';
+import { useTheme } from '../hooks/useTheme';
 import { formatBRL, formatDateTime, pluralize } from '../lib/format';
 import { orderService } from '../services/orders';
+import { defaultTheme } from '../themes';
 import type { Order } from '../types';
 
 type LoadState = { status: 'loading' } | { status: 'ready'; orders: Order[] } | { status: 'error' };
 
 export function Orders() {
   const [state, setState] = useState<LoadState>({ status: 'loading' });
+  const { theme } = useTheme();
 
   useEffect(() => {
     let active = true;
     orderService
       .listOrders()
-      .then((orders) => active && setState({ status: 'ready', orders }))
+      // Each brand shows its own history; orders saved before themes existed are Pizzaria.
+      .then((orders) => active && setState({ status: 'ready', orders: orders.filter((order) => (order.theme ?? defaultTheme.id) === theme.id) }))
       .catch(() => active && setState({ status: 'error' }));
     return () => {
       active = false;
     };
-  }, []);
+  }, [theme.id]);
 
   return (
     <>
@@ -61,7 +65,7 @@ export function Orders() {
                   <li key={order.id}>
                     <Link
                       to={`/pedido/${order.id}`}
-                      className="press flex items-center gap-3 rounded-card bg-surface p-4 shadow-card transition-shadow hover:shadow-[0_14px_30px_-16px_rgb(74_44_26/0.32)]"
+                      className="press flex items-center gap-3 rounded-card bg-surface p-4 shadow-card transition-shadow hover:shadow-card-hover"
                     >
                       <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand">
                         <ReceiptText className="size-6" strokeWidth={1.8} aria-hidden />

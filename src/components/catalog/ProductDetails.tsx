@@ -1,13 +1,15 @@
 import { Check, CircleAlert, SearchX, Users } from 'lucide-react';
 import { useRef, useState } from 'react';
-import { getProduct } from '../../data/products';
 import { useCart } from '../../hooks/useCart';
 import { useOverlay } from '../../hooks/useOverlay';
 import { addedMessage } from '../../hooks/useProductActions';
+import { useTheme } from '../../hooks/useTheme';
 import { useToast } from '../../hooks/useToast';
 import { cn } from '../../lib/cn';
 import { formatBRL } from '../../lib/format';
+import { imageSizes } from '../../lib/imageSizes';
 import { initialSelections, unitPrice, validateSelections } from '../../lib/pricing';
+import { getThemeProduct } from '../../themes';
 import type { CartItem, OptionGroup, Product, Selections } from '../../types';
 import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
@@ -23,7 +25,8 @@ const NOTES_MAX = 140;
 export function ProductDetails() {
   const overlay = useOverlay('produto');
   const cart = useCart();
-  const product = getProduct(overlay.value);
+  const { theme } = useTheme();
+  const product = getThemeProduct(theme, overlay.value);
   const editLineId = overlay.params.get('editar');
   const editingItem = editLineId ? cart.items.find((item) => item.lineId === editLineId) : undefined;
 
@@ -38,7 +41,7 @@ export function ProductDetails() {
     setLastKey(openKey);
     if (openKey) setDisplay((current) => ({ count: current.count + 1, productId: overlay.value, edit: editingItem }));
   }
-  const shown = overlay.isOpen ? product : getProduct(display.productId);
+  const shown = overlay.isOpen ? product : getThemeProduct(theme, display.productId);
 
   return (
     <Sheet open={overlay.isOpen} onClose={overlay.close} labelledBy="produto-titulo" width={600}>
@@ -73,6 +76,7 @@ interface ConfiguratorProps {
 function ProductConfigurator({ product, editingItem, onClose }: ConfiguratorProps) {
   const cart = useCart();
   const toast = useToast();
+  const { theme } = useTheme();
   const bag = useOverlay('sacola');
   const [selections, setSelections] = useState<Selections>(() => editingItem?.selections ?? initialSelections(product));
   const [notes, setNotes] = useState(editingItem?.notes ?? '');
@@ -129,19 +133,19 @@ function ProductConfigurator({ product, editingItem, onClose }: ConfiguratorProp
           <FoodImage
             image={product.image}
             priority
-            sizes="(min-width: 1024px) 600px, 100vw"
+            sizes={imageSizes.sheet}
             className="absolute inset-0 size-full object-cover"
           />
           <CloseButton
             onClick={onClose}
             label="Fechar detalhes do produto"
-            className="absolute top-3 right-3 bg-surface/95 shadow-[0_2px_10px_rgb(23_17_15/0.18)] hover:bg-surface"
+            className="absolute top-3 right-3 bg-surface/95 shadow-float-strong hover:bg-surface"
           />
         </div>
 
         <div className="px-4 pt-4 pb-5 sm:px-5">
           <div className="flex items-start gap-3">
-            <h2 id="produto-titulo" className="min-w-0 flex-1 text-[22px] leading-tight font-bold tracking-[-0.02em]">
+            <h2 id="produto-titulo" className="min-w-0 flex-1 font-heading text-[22px] leading-tight font-bold tracking-[-0.02em]">
               {product.name}
             </h2>
             <FavoriteButton product={product} className="relative shadow-none ring-1 ring-line" />
@@ -175,7 +179,7 @@ function ProductConfigurator({ product, editingItem, onClose }: ConfiguratorProp
           <TextAreaField
             label="Alguma observação?"
             optional
-            placeholder="Ex.: cortar em 8 pedaços, molho à parte"
+            placeholder={theme.brand.notesPlaceholder}
             maxLength={NOTES_MAX}
             value={notes}
             onChange={(event) => setNotes(event.target.value)}
@@ -224,7 +228,7 @@ function OptionGroupFieldset({ ref, product, group, chosen, error, onToggle }: O
 
   return (
     <fieldset ref={ref} aria-labelledby={titleId} aria-describedby={error ? errorId : undefined} className="scroll-mt-2 border-t-8 border-ground">
-      <div className="sticky top-0 z-[3] flex items-center gap-3 bg-[#f6f1ec] px-4 py-3 sm:px-5">
+      <div className="sticky top-0 z-[3] flex items-center gap-3 bg-ground-sticky px-4 py-3 sm:px-5">
         <div className="min-w-0 flex-1">
           <h3 id={titleId} className="text-[15px] leading-snug font-bold">
             {group.title}

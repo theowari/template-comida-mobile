@@ -3,7 +3,7 @@ import { useId, type ComponentProps, type ReactNode, type SelectHTMLAttributes, 
 import { cn } from '../../lib/cn';
 
 const control =
-  'w-full rounded-xl border-[1.5px] border-line-strong bg-surface px-4 text-base text-ink transition-[border-color,box-shadow] duration-150 outline-none placeholder:text-ink-2 hover:border-ink/35 focus:border-ink focus:shadow-[0_0_0_3px_rgb(32_32_32/0.12)] focus-visible:outline-none aria-[invalid=true]:border-brand aria-[invalid=true]:focus:shadow-[0_0_0_3px_rgb(215_25_53/0.16)] disabled:bg-ground-2 disabled:text-ink-2';
+  'w-full rounded-xl border-[1.5px] border-line-strong bg-surface px-4 text-base text-ink transition-[border-color,box-shadow] duration-150 outline-none placeholder:text-ink-2 hover:border-ink/35 focus:border-ink focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-ink)_12%,transparent)] focus-visible:outline-none aria-[invalid=true]:border-brand aria-[invalid=true]:focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-brand)_16%,transparent)] disabled:bg-ground-2 disabled:text-ink-2';
 
 interface FieldShellProps {
   id: string;

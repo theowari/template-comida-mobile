@@ -8,6 +8,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
-    css: false,
+    // Styles are not processed in tests; only `?raw` imports (token checks) read the files.
+    css: { include: [/\.css\?raw$/] },
   },
 });

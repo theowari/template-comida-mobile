@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { products } from '../data/products';
+import { products } from '../themes/pizzaria/products';
 import { defaultFilters, filterProducts, isRefining, matchScore } from './catalog';
 import { startingPrice } from './pricing';
 

@@ -4,6 +4,7 @@ import { CartProvider } from './hooks/useCart';
 import { CatalogFiltersProvider } from './hooks/useCatalogFilters';
 import { CheckoutDraftProvider } from './hooks/useCheckoutDraft';
 import { FavoritesProvider } from './hooks/useFavorites';
+import { ThemeProvider } from './hooks/useTheme';
 import { ToastProvider } from './hooks/useToast';
 import { Checkout } from './pages/Checkout';
 import { Favorites } from './pages/Favorites';
@@ -39,16 +40,18 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
-    <CheckoutDraftProvider>
-      <CartProvider>
-        <FavoritesProvider>
-          <CatalogFiltersProvider>
-            <ToastProvider>
-              <RouterProvider router={router} />
-            </ToastProvider>
-          </CatalogFiltersProvider>
-        </FavoritesProvider>
-      </CartProvider>
-    </CheckoutDraftProvider>
+    <ThemeProvider>
+      <CheckoutDraftProvider>
+        <CartProvider>
+          <FavoritesProvider>
+            <CatalogFiltersProvider>
+              <ToastProvider>
+                <RouterProvider router={router} />
+              </ToastProvider>
+            </CatalogFiltersProvider>
+          </FavoritesProvider>
+        </CartProvider>
+      </CheckoutDraftProvider>
+    </ThemeProvider>
   );
 }

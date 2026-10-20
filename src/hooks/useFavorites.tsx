@@ -1,6 +1,7 @@
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { getProduct } from '../data/products';
 import { readStorage, storageKeys, writeStorage } from '../lib/storage';
+import { getProduct, themeStorageKey } from '../themes';
+import { useTheme } from './useTheme';
 
 interface FavoritesContextValue {
   ids: string[];
@@ -14,14 +15,23 @@ const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 const isStringList = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === 'string');
 
+const loadFavorites = (key: string) => readStorage<string[]>(key, [], isStringList).filter((id) => getProduct(id));
+
+/** One favorites list per theme, like the bag. */
 export function FavoritesProvider({ children }: { children: ReactNode }) {
-  const [ids, setIds] = useState<string[]>(() =>
-    readStorage<string[]>(storageKeys.favorites, [], isStringList).filter((id) => getProduct(id)),
-  );
+  const { theme } = useTheme();
+  const key = themeStorageKey(storageKeys.favorites, theme.id);
+  const [ids, setIds] = useState<string[]>(() => loadFavorites(key));
+  const [loadedKey, setLoadedKey] = useState(key);
+
+  if (loadedKey !== key) {
+    setLoadedKey(key);
+    setIds(loadFavorites(key));
+  }
 
   useEffect(() => {
-    writeStorage(storageKeys.favorites, ids);
-  }, [ids]);
+    writeStorage(loadedKey, ids);
+  }, [ids, loadedKey]);
 
   const isFavorite = useCallback((productId: string) => ids.includes(productId), [ids]);
 
